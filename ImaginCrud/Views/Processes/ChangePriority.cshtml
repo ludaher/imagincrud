@@ -1,0 +1,90 @@
+﻿@model ImaginCrud.Models.PriorityModel
+
+@{
+    ViewBag.Title = "Cambio de prioridad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cambio de prioridad de procesos</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tasks"></i> Individual</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("ChangeIndividualPriority", "Processes"))
+            {
+                    <div class="form-group">
+                        <label>Producto</label>
+                        @Html.DropDownListFor(m => m.FormId, (List<SelectListItem>)ViewBag.Forms, "Seleccione un producto", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre del archivo</label>
+                        @Html.TextBoxFor(model => model.FileName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FileName)
+                    </div>
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        @Html.EnumDropDownListFor(x => x.Priority, "Seleccione una prioridad", new { @class = "form-control", required = "required" })
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button type="submit" class="btn btn-success navbar-btn">Guardar</button>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tasks"></i> Por archivo</h3>
+            </div>
+            <div class="panel-body">
+
+                @using (Html.BeginForm("ChangePriorities", "Processes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                    <div class="form-group">
+                        <label>Producto</label>
+                        @Html.DropDownListFor(m => m.FormId, (List<SelectListItem>)ViewBag.Forms, "Seleccione un producto", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Archivo con lista de procesos</label>
+                        @Html.TextBoxFor(m => m.Files, new { type = "file", name = "Files" })
+                    </div>
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        @Html.EnumDropDownListFor(x => x.Priority, "Seleccione una prioridad", new { @class = "form-control", required = "required" })
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button type="submit" class="btn btn-success navbar-btn">Guardar</button>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.SuccessProcesses ==1 || Model.ErrorProcesses ==0)
+{
+    <div class="alert alert-info">
+        <strong>Bien!</strong> Se completó el cambio de prioridad para el proceso @Model.FileName
+    </div>
+}else if (Model.SuccessProcesses > 0 || Model.ErrorProcesses > 0)
+{
+    <div class="alert alert-info">
+        <strong>Ohhh!</strong> Se completaron @Model.SuccessProcesses cambios de prioridad de @(Model.ErrorProcesses + Model.SuccessProcesses) procesos
+    </div>
+}
+
+@if (string.IsNullOrWhiteSpace(Model.ErrorMessages) == false)
+{
+    <div class="alert alert-danger">
+        <strong>Ups!</strong> @Model.ErrorMessages
+    </div>
+}

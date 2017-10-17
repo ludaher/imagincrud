@@ -1,0 +1,77 @@
+﻿@model ImaginCrud.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Usuarios</strong>
+</h2>
+<hr>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>Alerta!</strong> @ViewBag.Error
+    </div>
+}
+@if (Model != null)
+{
+    <div ng-app="Form" class="container">
+        <div class="row" ng-controller="FormController" novalidate ng-init="loadModel('@Model.UserName', '@Model.Email', '@Model.Password', '@Model.ConfirmPassword')">
+            <form action="~/Account/Register" method="post" name="form">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-tasks"></i> Registrar usuario</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="UserName">Nombre de usuario</label>
+                                    <input type="text" class="form-control" name="UserName" placeholder="Nombre de usuario" required value="@Model.UserName" ng-model="user.UserName" />
+                                    <span ng-show="!form.UserName.$valid && form.UserName.$touched" class="error">El nombre de usuario es requerido.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo electrónico</label>
+                                    <input type="email" class="form-control" name="Email" placeholder="Correo electrónico" value="@Model.Email" required ng-model="user.Email" />
+                                    <span ng-show="form.Email.$error.required && form.Email.$touched" class="error">El correo electrónico es requerido.</span>
+                                    <span ng-show="form.Email.$error.email && form.Email.$touched" class="error">Formato de correo electrónico incorrecto.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="Password">Contraseña</label>
+                                    <input type="password" class="form-control" name="Password" placeholder="Contraseña" value="@Model.Password" required ng-model="user.Password" />
+                                    <span ng-show="!form.Password.$valid && form.Password.$touched" class="error">La contraseña es requerida.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Contraseña</label>
+                                    <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirmar contraseña" value="@Model.ConfirmPassword" required ng-model="user.ConfirmPassword" password-verify="user.Password" />
+                                    <span ng-show="form.ConfirmPassword.$error.required && form.ConfirmPassword.$touched" class="error">La confirmación de contraseña es requerida.</span>
+                                    <span ng-show="form.ConfirmPassword.$error.passwordVerify && form.ConfirmPassword.$touched" class="error">La confirmación no coincide con el password.</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button type="submit" class="btn btn-success navbar-btn" ng-disabled="form.$invalid">Guardar</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Ver lista", "Index", "Users")
+</div>
+@section Scripts {
+    <script type="text/javascript">
+    </script>
+
+    <script src="~/Scripts/App/Controllers/RegisterUserController.js"></script>
+}

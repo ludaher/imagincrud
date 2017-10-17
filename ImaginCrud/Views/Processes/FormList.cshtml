@@ -1,0 +1,78 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.Form>
+
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('FormId')">
+                Número producto
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('FormId',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('FormId',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('Name')">
+                Nombre
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Name',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Name',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-1">
+            Pendiente
+        </th>
+        <th class="col-md-1">
+            Capturando
+        </th>
+        <th class="col-md-1">
+            Capturado
+        </th>
+        <th class="col-md-1">
+            Validando
+        </th>
+        <th class="col-md-1">
+            Validado
+        </th>
+        <th class="col-md-1">
+        </th>
+        <th class="col-md-1">
+        </th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Número producto">
+                @Html.DisplayFor(modelItem => item.FormId)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Nombre del producto">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Pendientes">
+                @item.ProcessesPending
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="En captura">
+                @item.ProcessesInCapture
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Capturado">
+                @item.ProcessesCaptured
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="En validación">
+                @item.ProcessesInValidate
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Validado">
+                @item.ProcessesValidated
+            </td>
+
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Buscar", "ProcessesByProduct", "Processes", new { id = item.FormId }, new { @class = "btn btn-primary" })
+                </div>
+            </td>
+            <td>
+                <div class="btn-group ">
+                    <a class="btn btn-default" href="@( Url.Content ($"~/Reports/Form_{item.FormId}_All.aspx"))" target="_blank">Exportar</a>
+                    @*<a class="btn btn-default" href="~/Reports/ExportForm.aspx?form=@item.FormId" target="_blank">Exportar</a>*@
+                </div>
+            </td>
+        </tr>
+    }
+</table>

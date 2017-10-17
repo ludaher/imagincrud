@@ -1,0 +1,9 @@
+﻿
+UPDATE [dbo].{{TABLE_NAME}}
+   SET [CompletedSections] = {{COMPLETED_SECTIONS}}
+      ,[TemporalData] = '{{TEMPORAL_DATA}}'
+      ,[ModifiedBy] = '{{MODIFIED_BY}}'
+      ,[ModifiedOn] = {{MODIFIED_ON}}
+ WHERE TableId = {{TABLE_ID}}
+GO
+

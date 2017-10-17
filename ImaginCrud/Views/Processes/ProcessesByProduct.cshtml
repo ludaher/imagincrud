@@ -1,0 +1,145 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.TypingProcess>
+
+@{
+    ViewBag.Title = "Procesos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Procesos de @Model.EntityToFind.Form.Name</strong>
+</h2>
+<hr>
+<div class="panel-group" ng-app="Form">
+    <div class="panel panel-default" ng-controller="FormController" ng-init="loadFromData('@Model.EntityToFind.Form.FormId')">
+        <div class="panel-heading row">
+            <div class="col-xs-5 pagining-option-buttons ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">Busqueda</button>
+            </div>
+            <div class="col-xs-3 pagining-pages">
+                <a href="javascript:void(0);" ng-show="seachEntity.Page>1" ng-click="previous();">&laquo;</a>
+                Pagina
+                <input type="text" name="Page" ng-model="seachEntity.Page" class="pagining-control page" value="@Model.Page" ng-change="find()" />
+                de {{seachEntity.TotalPages}}
+                <a href="javascript:void(0);" ng-show="(seachEntity.TotalPages > seachEntity.Page)" ng-click="next();">&raquo;</a>
+            </div>
+            <div class="col-xs-4 text-right pagining-items-by-page ">
+                <label>
+                    Ver
+                </label>
+                <select ng-model="seachEntity.ItemsByPage" name="ItemsByPage" ng-change="find()" class="pagining-control">
+                    <option value="10" selected="selected">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <label>
+                    elementos
+                </label>
+            </div>
+        </div>
+        <div id="filter-panel" class="collapse panel-body" ng->
+            <div class="">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label>Sección </label>
+                            <select ng-model="seachEntity.SelectedSection" name="ItemsByPage" ng-change="loadFields()" class="form-control selectpicker">
+                                <option value="-1">Todos</option>
+                                @foreach (ImaginCrud.Entities.Section section in ViewBag.Sections)
+                                {
+                                    <option value="@(section.SectionId)">@(section.SectionName)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Campo</label>
+                            <select ng-model="seachEntity.SelectedField" name="ItemsByPage" ng-change="changeField()" class="form-control  selectpicker">
+                                <option ng-repeat="field in fields" value="{{$index}}">{{field.Title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="animate-switch-container" ng-switch on="template.FieldTypeId" form-control>
+                            <div class="form-group edit-control col-md-12 ng-scope" ng-switch-when="1" data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <input type="text" form-control valid-number class="form-control" data-placement="bottom" placeholder="{{template.Title}}" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="template.Required" ng-model="template.Value" value="{{template.Value}}" maxlength="{{template.MaxLength}}" title="{{buildNumberTitle(template.MinNumber,template.MaxNumber)}} " ng-min="{{template.MinNumber}}" ng-max="{{template.MaxNumber}}" />
+                            </div>
+                            <div class="form-group edit-control col-md-12 ng-scope" ng-switch-when="3" data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <label class="form-control" for="nameForm"><input type="checkbox" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-model="template.Value" ng-true-value="'True'" ng-false-value="'False'" /></label>
+                            </div>
+                            <div class="form-group col-md-12 ng-scope" ng-switch-when="4" data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <select class="form-control" form-control data-placement="bottom" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="template.Required" ng-model="template.Value">
+                                    <option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group edit-control col-md-12 ng-scope" ng-switch-when="5" data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <select class="form-control" form-control data-placement="bottom" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row).toString()" ng-focus="setActualFocusField($index,row)" ng-required="template.Required" ng-model="template.Value" ng-change="changeSelect()">
+                                    <option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-date edit-control col-md-12}} ng-scope" ng-switch-when="6" data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <div class='input-group date'>
+                                    <input type='text' class="form-control datepicker" form-control data-placement="bottom" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="template.Required" ng-model="template.Value" mask="19/39/9999" restrict="reject" title="fecha" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group edit-control col-md-12 ng-scope" ng-switch-default data-allow-transform="true">
+                                <label class="control-label" for="nameForm">{{template.Title}}</label>
+                                <input type="{{textboxType(template.Validation)}}" form-control data-placement="bottom" class="form-control" name="{{formFieldClass($index,row)}}" placeholder="{{template.Title}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="template.Required" ng-model="template.Value" ng-maxlength="template.MaxLength" maxlength="{{template.MaxLength}}" title="{{template.Validation}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" ng-click="find()">Buscar</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div dynamic="listHtml" id="ContentList">
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="HistoryModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Aceptar"><span aria-hidden="true">&times;</span></button>
+                        <h3>Flujo de estados del proceso</h3>
+                    </div>
+                    <div class="modal-body scrollable" style="min-height: 100px; max-height: 500px; overflow:auto;">
+                        <div class="text-center">
+                            <div ng-repeat="item in history">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">{{item.TypingStatusDescription}} - {{item.ModifiedOnString}}</div>
+                                    <div class="panel-body">{{item.ModifiedBy}}: {{item.Observations}}</div>
+                                </div>
+                                <img src="~/Content/images/DownArrow.png" />
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Fin</div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+    </div>
+
+    @section scripts{
+        <script type="text/javascript">
+            var getFormsDataView = '@Url.Action("GetProcessesView", "Processes")';
+            var getSectionFields = '@Url.Action("GetSectionFields", "Processes")';
+            var getHistory = '@Url.Action("GetProcessHistory", "Processes")';
+        </script>
+        <script src="~/Scripts/App/Controllers/ProcessesByProductController.js"></script>
+
+    }

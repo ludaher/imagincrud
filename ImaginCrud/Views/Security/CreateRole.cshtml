@@ -1,0 +1,45 @@
+﻿@model ImaginCrud.Models.RoleModel
+@{
+    ViewBag.Title = "CreateRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Roles</strong>
+</h2>
+<hr>
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-tasks"></i> Crear rol</h3>
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RoleName)
+                        @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RoleName)
+                    </div>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button type="submit" class="btn btn-success navbar-btn" >Guardar</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Ver lista", "Roles")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

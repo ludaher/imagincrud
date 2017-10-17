@@ -1,0 +1,67 @@
+﻿@model ImaginCrud.Entities.FieldDataSource
+
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Datos para campos de selección</strong>
+</h2>
+<hr>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>Alerta!</strong> @ViewBag.Error
+    </div>
+}
+@if (Model != null)
+{
+    using (Html.BeginForm("LoadFieldDataSource", "FormsAdministrator", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                @if (Model.FieldDataSourceId == default(int))
+                {
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Cargar datos</h3>
+                }
+                else
+                {
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Editar datos</h3>
+                }
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            @Html.HiddenFor(model => model.FieldDataSourceId, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Archivo CSV</label>
+                            <input type="file" name="file" id="csvFile" />
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="submit" class="btn btn-success navbar-btn" ng-disabled="form.$invalid">Guardar</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+}
+<div>
+    @Html.ActionLink("Ver lista", "ManageFieldSources")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-select.js"></script>
+}

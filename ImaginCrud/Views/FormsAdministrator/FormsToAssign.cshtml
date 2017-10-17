@@ -1,0 +1,95 @@
+﻿@model ImaginCrud.Models.SearchFormsModel
+
+@{
+    ViewBag.Title = "Forms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Asignación de usuarios</strong>
+</h2>
+<hr>
+<div class="alert alert-info">
+    <strong>Recuerda!</strong> Solo puedes asignar usuarios digitadores y validadores a los productos.
+</div>
+<div class="panel-group" ng-app="Form">
+    <div class="panel panel-default" ng-controller="FormController">
+        <div class="panel-heading row">
+            <div class="col-xs-5 pagining-option-buttons ">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">Busqueda</button>
+            </div>
+            <div class="col-xs-3 pagining-pages">
+
+                <a href="javascript:void(0);" ng-show="seachEntity.Page>1" ng-click="previous();">&laquo;</a>
+                Pagina
+                <input type="text" name="Page" ng-model="seachEntity.Page" class="pagining-control page" value="@Model.Page" ng-change="find()" />
+                de {{seachEntity.TotalPages}}
+                <a href="javascript:void(0);" ng-show="(seachEntity.TotalPages > seachEntity.Page)" ng-click="next();">&raquo;</a>
+            </div>
+            <div class="col-xs-4 text-right pagining-items-by-page ">
+                <label>
+                    Ver
+                </label>
+                <select ng-model="seachEntity.ItemsByPage" name="ItemsByPage" ng-change="find()" class="pagining-control">
+                    <option value="10" selected="selected">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                @*@Html.DropDownListFor(x => x.ItemsByPage, new SelectList(new List<string>() { "10", "25", "50", "100" }), new { @class = "pagining-control", onchange = "this.form.submit();" })*@
+                <label>
+                    elementos
+                </label>
+            </div>
+        </div>
+        <div id="filter-panel" class="collapse panel-body">
+            <div class="">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="FormId">Número de producto</label>
+                            <input type="text" maxlength="11" class="form-control" ng-model="seachEntity.FormId" name="FormId" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Name">Nombre</label>
+                            <input type="text" maxlength="100" class="form-control" ng-model="seachEntity.Name" name="Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Name">Cliente</label>
+                            <select class="form-control" ng-model="seachEntity.CustomerId" name="CustomerId">
+                                <option value=""></option>
+                                @foreach (var item in Model.Customers)
+                                {
+                                    <option value="@item.CustomerId">
+                                        @item.Name
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6">
+                        <label> </label>
+                        <button class="btn btn-default" type="button" ng-click="findWithParameters()"><i class="glyphicon glyphicon-search"> Buscar</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div dynamic="listHtml" id="ContentList">
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var getFormsView = '@Url.Action("GetActiveForms", "FormsAdministrator")';
+    </script>
+    <script src="~/Scripts/App/Controllers/FormsToAsign.js"></script>
+
+}

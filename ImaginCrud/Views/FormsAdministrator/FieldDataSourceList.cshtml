@@ -1,0 +1,49 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.FieldDataSource>
+
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-4">
+            <a href="javascript:void(0);" ng-click="changeOrder('Description')">
+                Descripción
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Description',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Description',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('ModifiedBy')">
+                Modificado por
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('ModifiedBy',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('ModifiedBy',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-4">
+            <a href="javascript:void(0);" ng-click="changeOrder('ModifiedOn')">
+                Fecha de modificación
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('ModifiedOn',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('ModifiedOn',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-1"></th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Número producto">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Modificado por">
+                @(item.ModifiedBy ?? item.CreatedBy)
+            </td>
+
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Nombre del producto">
+                @(item.ModifiedOn.HasValue ? item.ModifiedOn.Value.ToString("dd/MM/yyyy HH:mm:ss") : item.CreatedOn.ToString("dd/MM/yyyy HH:mm:ss"))
+            </td>
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Editar", "EditFieldDataSource", "FormsAdministrator", new { id = item.FieldDataSourceId }, new { @class = "btn btn-primary" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>

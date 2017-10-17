@@ -1,0 +1,23 @@
+﻿IF (NOT EXISTS (SELECT * 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = '{{TABLE_NAME}}'))
+BEGIN
+   
+	CREATE TABLE {{TABLE_NAME}}
+	(
+		TableId int IDENTITY(1,1) not null,
+		TypingProcessId nvarchar(50) not null,
+		FormId int not null,
+		RegisterType smallint not null,
+		CompletedSections int not null,
+		TemporalData varchar(max) null,
+		CreatedBy varchar(50) not null,
+		CreatedOn datetime not null,
+		ModifiedBy varchar(50) null,
+		ModifiedOn datetime null,
+		PRIMARY KEY (TableId),
+		FOREIGN KEY (TypingProcessId, FormId) REFERENCES TypingProcesses(TypingProcessId, FormId)
+	);
+ 
+END

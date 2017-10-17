@@ -1,0 +1,42 @@
+﻿@model ImaginCrud.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Porfavor ingrese su usuario y contraseña.</strong>
+</h2>
+<hr>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div class="row center_div">
+        <div class="">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="btn-group btn-group-justified">
+        <input type="submit" value="Ingresar" class="btn-default " id="login" />
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

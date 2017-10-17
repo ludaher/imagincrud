@@ -1,0 +1,62 @@
+﻿@model  IEnumerable<ImaginCrud.Models.RoleModel>
+
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Roles</strong>
+</h2>
+<hr>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>Alerta!</strong> @ViewBag.Error
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading row">
+                <div class="col-xs-5 pagining-option-buttons ">
+                    @Html.ActionLink("Crear", "CreateRole", new { },
+                            new { @class = "btn btn-primary " })
+                </div>
+            </div>
+            <div class="">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Nombre del rol
+                        </th>
+                        <th style="width: 220px; min-width: 220px;"></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Identificador">
+                                @Html.DisplayFor(modelItem => item.RoleName)
+                            </td>
+                            <td>
+                                <div class="btn-group ">
+                                    @Html.ActionLink("Eliminar", "DeleteRole", "Security", new { roleName = item.RoleName }, new { @class = "btn btn-primary" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/gridScripts")
+}

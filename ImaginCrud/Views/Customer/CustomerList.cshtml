@@ -1,0 +1,48 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.Customer>
+
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('CustomerId')">
+                Identificación
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('CustomerId',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('CustomerId',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-5">
+            <a href="javascript:void(0);" ng-click="changeOrder('Name')">
+                Nombre
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Name',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Name',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('Phone')">
+                Teléfono
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Phone',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Phone',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-1"></th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Nombre">
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descripción">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descripción">
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.CustomerId }, new { @class = "btn btn-primary" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>

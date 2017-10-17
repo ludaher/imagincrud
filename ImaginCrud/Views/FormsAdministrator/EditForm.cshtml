@@ -1,0 +1,351 @@
+﻿@model ImaginCrud.Entities.Form
+@using ImaginCrud.Entities
+@{
+    ViewBag.Title = "Editar producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-app="Form" class="container">
+    <div class="row" ng-controller="FormController" novalidate ng-init="loadFromData(@Model.FormId,'@Model.Name', '@Model.Description', @Json.Encode(Model.Active), @Model.TemplateHeight, '@Model.TemplatePath', @Model.RequiredCaptures)">
+        <div id="basicData" ng-show="configuration.basicData" ng-hide="!configuration.basicData" ng-click="clickBody($event)">
+            <div class="form-actions">
+                <div class="alert alert-danger" role="alert" data-ng-repeat="error in formErrors">
+                    <div>{{error}}</div>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-success navbar-btn" ng-click="saveFormData()">Guardar</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="pdf-viewer col-md-6 embed-responsive">
+                <div class="pdf-options">
+                    <div class="row">
+                        <div class="checkbox">
+                            <label>Rotate 180<input type="checkbox" ng-model="rotate" ng-change="changePdfPosition()" /></label>
+                        </div>
+                    </div>
+                </div>
+                @*<div>
+                        <ng-pdf template-url="~/Content/viewer.html" canvasid="pdf" scale="page-fit" page="1"></ng-pdf>
+                    </div>*@
+                @*<iframe id="viewer" scrolling="no" src="~/Content/FormTemplates/@Path.GetFileName(Model.TemplatePath)"></iframe>*@
+                <iframe id="viewer" src="@Url.Action("LoadFormContent", "FormsAdministrator", new { id = Model.FormId, file = Model.TemplatePath })#zoom=110&toolbar=0&navpanes=0&scrollbar=0" width="1050" ng-class="pdfClass()"></iframe>
+                <div class="form-options">
+                    <div class="menu-options">
+                        <ul class="nav nav-pills nav-vertical">
+                            <li ng-class="viewSection == false?'active':''"><a href="#basic" ng-click="loadBasicData();">Información básica</a></li>
+                            <li data-ng-repeat="section in sections" ng-class="setActiveSection($index)?'active':''">
+                                <a href="#menu{{indexOfSection(section)}}" ng-click="loadSection(section, $event);" id="sectionTab{{indexOfSection(section)}}">
+                                    Sec.{{$index+1}}
+                                    <button class="close closeTab" ng-click="removeSection(section);" type="button">×</button>
+                                </a>
+                            </li>
+                            <li><a class="btn btn-success" href="#addSection" ng-click="addSection();">+</a></li>
+                        </ul>
+                    </div>
+                    <div class="panel panel-default form-fields-edit" ng-show="viewSection && !viewProperties">
+                        <div class="templates-panel">
+                            <div data-ng-repeat="template in formTemplates">
+                                <div class="animate-switch-container" ng-switch on="template.FieldTypeId">
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="1" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template)" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <input type="text" class="form-control" placeholder="{{template.Title}}" />
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="3" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template)" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <label class="form-control" for="nameForm"><input type="checkbox"></label>
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="4" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template)" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <select class="form-control selectpicker" disabled="disabled">
+                                            <option value="">Seleccione una opción</option>
+                                            @*<option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="5" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template)" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <select class="form-control selectpicker" disabled="disabled">
+                                            <option value="">Seleccione opciones</option>
+                                            @*<option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-default ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template)" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <input type="text" class="form-control" placeholder="{{template.Title}}" />
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="6" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template);" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                        <div class='input-group date'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 ng-scope" ng-switch-when="7" ng-drag="true" ng-drag-data="template" ng-dblclick="onDropComplete1(template);" data-allow-transform="true">
+                                        <label class="" for="nameForm" ng-show="template.Title!=''">{{template.Title}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading">
+                            <span>Nombre de sección {{sections[actualSection].Id+1}}: </span>
+                            <input type="text" class="form-control" ng-model="sections[actualSection].SectionName" name="SectionName{{actualSection}}" required ng-change="isValidForm()" />
+                            <input name="Section{{actualSection}}" class="section-position" slider-control type="text" data-slider-min="60" data-slider-value="60" data-slider-step="10" ng-model="sections[actualSection].Position" />
+                            <span>&nbsp Es una tabla:</span>
+                            <input type="checkbox" class="" ng-model="sections[actualSection].IsTable" name="IsTableSection{{actualSection}}" ng-change="isValidForm()" />
+                            <span ng-show="sections[actualSection].IsTable">&nbsp Número de filas:</span>
+                            <input ng-show="sections[actualSection].IsTable" type="text" valid-number class="form-control" ng-model="sections[actualSection].NumberOfRows" name="RowsSection{{actualSection}}" required ng-change="isValidForm()" />
+                        </div>
+                        <div class="panel-body pre-scrollable" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)" id="formPanel">
+                            <div data-ng-repeat="template in sections[actualSection].Fields" class="work-area-panel">
+                                <div class="animate-switch-container" ng-switch on="template.FieldTypeId" form-control>
+                                    <div class="clearfix" ng-switch-when="7">
+                                    </div>
+                                    <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="1" data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <input type="text" class="form-control" placeholder="{{template.Title}}" />
+                                    </div>
+                                    <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="3" data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <label class="form-control" for="nameForm"><input type="checkbox"></label>
+                                    </div>
+                                    <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="4" data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <select class="form-control selectpicker" disabled="disabled">
+                                            <option value="">Seleccione una opción</option>
+                                            @*<option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="5" data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <select class="form-control selectpicker" disabled="disabled">
+                                            <option value="">Seleccione opciones</option>
+                                            @*<option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>*@
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group-date edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="6" data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <div class='input-group date'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-default data-allow-transform="true" ng-dblclick="viewPropertiesForm(template,$event)" ng-click="toggleActionsField(template,$event)" ng-class="selectedClass(template)">
+                                        <label class="" for="nameForm">{{template.Title}}</label>
+                                        <input type="text" class="form-control" placeholder="{{template.Title}}" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary form-data" ng-show="!viewSection && !viewProperties">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-tasks"></i> Información producto</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="work-area-panel">
+                                <form name="form" ng-action="isValidForm()">
+                                    <div class="form-group col-md-6">
+                                        <label class="" for="nameForm">Nombre</label>
+                                        <input type="text" class="form-control" name="Name" placeholder="Nombre" ng-model="newForm.Name" required ng-change="isValidForm()" />
+                                        <span ng-show="!form.Name.$valid && form.Name.$touched">El nombre es requerido.</span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="isActive" class="col-md-12 text-center">
+                                            Activo
+                                        </label>
+                                        <label class="form-control">
+                                            <input type="checkbox" class="" name="Active" ng-model="newForm.Active" ng-change="isValidForm()" />
+                                        </label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group col-md-7">
+                                        <label class="" for="description">Descripción</label>
+                                        <input type="text" class="form-control" name="Description" placeholder="Descripción" maxlength="150" ng-model="newForm.Description" required ng-change="isValidForm()" />
+                                        <span ng-show="!form.Description.$valid && form.Description.$touched">La descripción es requerida.</span>
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        <label class="" for="description">Digitaciones</label>
+                                        <input type="number" class="form-control" name="Digitaciones" placeholder="Digitaciones" maxlength="150" ng-model="newForm.RequiredCaptures" required ng-change="isValidForm()" min="1" max="2" />
+                                        <span ng-show="!form.Digitaciones.$valid && form.Digitaciones.$touched">Cantidad de digitaciones no válido.</span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group col-md-6 ">
+                                        <label class="" for="uploadPDF">Cambiar archivo</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="uploadPDF" type="file" data-ak-file-model="newForm.attachment" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="" for="description">Tamaño del producto</label>
+                                        <div class="slide-panel">
+                                            <input id="iframeHeight" ng-model="form.TemplateHeight" class="form-control" type="text" data-slider-horizontal-width="100%" data-slider-orientation="horizontal" ng-change="isValidForm()" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-field" style="position:fixed" ng-show="viewActionsField && !viewProperties" ng-style="{left:actionsFieldPosX+'px', top: actionsFieldPosY+'px'}">
+                        <div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="button" class="btn btn-info navbar-btn" ng-click="moveBackField()" title="Atras"><</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-info navbar-btn" ng-click="moveNextField()" title="Adelante">></button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-danger navbar-btn" ng-click="removeField()" title="Eliminar">X</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="button" class="btn navbar-btn" ng-click="addSizeField(-1)" title="Menos tamaño">-</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn navbar-btn" ng-click="addSizeField(1)" title="Más tamaño">+</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-success navbar-btn" ng-click="viewPropertiesForm2()" title="Detalle">...</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary ng-hide" ng-show="viewProperties">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <button type="button" class="btn btn-danger right" ng-click="removeField()">Eliminar</button>
+                                <i class="fa fa-tasks"></i> Propiedades del producto
+
+                            </h3>
+
+                        </div>
+                        <div class="panel-body pre-scrollable work-area-panel">
+                            <div class="form-group col-md-6">
+                                <label class="" for="">Titulo</label>
+                                <input type="text" class="form-control" name="Title" placeholder="Titulo" ng-model="sections[actualSection].Fields[actualField].Title" required />
+                            </div>
+                            <div class="form-group col-md-6" ng-if="isTextBox(sections[actualSection].Fields[actualField].FieldTypeId) || isMultipleOption(sections[actualSection].Fields[actualField].FieldTypeId) || sections[actualSection].Fields[actualField].FieldTypeId == 6">
+                                <div class="form-group col-md-6" ng-if="isTextBox(sections[actualSection].Fields[actualField].FieldTypeId) || isMultipleOption(sections[actualSection].Fields[actualField].FieldTypeId) || sections[actualSection].Fields[actualField].FieldTypeId == 6">
+                                    <label class="" for="">Requerido</label>
+                                    <input type="checkbox" class="form-control" name="Required" ng-model="sections[actualSection].Fields[actualField].Required" required />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="" for="">Doble captura</label>
+                                    <input type="checkbox" class="form-control" name="DobleCapture" ng-model="sections[actualSection].Fields[actualField].DobleCapture" required />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6" ng-if="isOnlyTextBox(sections[actualSection].Fields[actualField].FieldTypeId)">
+                                <label class="" for="">Máximo de caracteres</label>
+                                <input type="number" class="form-control" name="Max" placeholder="Máximo" ng-model="sections[actualSection].Fields[actualField].MaxLength" required maxlength="13" />
+                            </div>
+                            <div class="col-md-6" ng-if="isOnlyTextBox(sections[actualSection].Fields[actualField].FieldTypeId)">
+                                <label class="" for="">Formato</label>
+                                <select class="form-control selectpicker" ng-model="sections[actualSection].Fields[actualField].Validation">
+                                    <option data-ng-repeat="option in validations" value="{{option.Value}}">{{option.Text}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" ng-if="isDateTextBox(sections[actualSection].Fields[actualField].FieldTypeId)">
+                                <label class="" for="">Formato</label>
+                                <select class="form-control selectpicker" ng-model="sections[actualSection].Fields[actualField].Validation">
+                                    <option value="39/19/9999">dd/MM/yyyy</option>
+                                    <option value="19/39/9999">MM/dd/yyyy</option>
+                                    <option value="9999-19-39">yyyy-MM-dd</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" ng-if="isNumberTextBox(sections[actualSection].Fields[actualField].FieldTypeId)">
+                                <div class="form-group col-md-6">
+                                    <label class="" for="">Número mínimo</label>
+                                    <input type="number" class="form-control" name="MinNumber" placeholder="Número mínimo" ng-model="sections[actualSection].Fields[actualField].MinNumber" ng-change="changeNumberValidation()" maxlength="13" required />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="" for="">Número máximo</label>
+                                    <input type="number" class="form-control" name="MaxNumber" placeholder="Número máximo" ng-model="sections[actualSection].Fields[actualField].MaxNumber" ng-change="changeNumberValidation()" maxlength="13" required />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-md-12" ng-if="isMultipleOption(sections[actualSection].Fields[actualField].FieldTypeId)">
+                                <div class="form-group col-md-3">
+                                    <label class="" for="">Opciones</label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <select class="form-control" ng-model="sections[actualSection].Fields[actualField].DataList">
+                                        <option value="0" ng-selected="0 == sections[actualSection].Fields[actualField].DataList">Personalizado</option>
+                                        @foreach (FieldDataSource value in ViewBag.SelectDataSources)
+                                        {
+                                            <option value="@((int)value.FieldDataSourceId)" ng-selected="@((int)value.FieldDataSourceId) == sections[actualSection].Fields[actualField].DataList">@value.Description</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-5" ng-show="sections[actualSection].Fields[actualField].DataList == 0">
+                                    <button class="btn btn-primary" ng-click="addOptionInForm()">+</button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div ng-show="sections[actualSection].Fields[actualField].DataList==0">
+                                    <div class="" data-ng-repeat="option in sections[actualSection].Fields[actualField].OptionList">
+                                        <div class="form-group col-md-5">
+                                            <input type="text" class="form-control" name="Value" placeholder="Valor" ng-model="option.value" required />
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <input type="text" class="form-control" name="Text" placeholder="Texto" ng-model="option.label" required />
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button class="btn btn-danger" ng-click="removeOptionInForm(option)">-</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="button" class="btn btn-success navbar-btn" ng-click="hidePropertiesForm()">Aceptar</button>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var pdfUrl = "@Url.Action("LoadFormContent", "FormsAdministrator", new { id = Model.FormId, file = Model.TemplatePath })" + "#zoom=110&toolbar=0&navpanes=0&scrollbar=0";
+        var saveFile = '@Url.Action("SaveFile", "FormsAdministrator")';
+        var saveForm = '@Url.Action("SaveForm", "FormsAdministrator")';
+        var saveAllForm = '@Url.Action("SaveAllForm", "FormsAdministrator")';
+        var saveSection= '@Url.Action("SaveSection", "FormsAdministrator")';
+        var editForm = '@Url.Action("EditForm", "FormsAdministrator")';
+        var editCustomer = '@Url.Action("Edit", "Customer")';
+        var getSectionsForm = '@Url.Action("GetSections", "FormsAdministrator")';
+        var templatePath = '../../Content/FormTemplates/@Path.GetFileName(Model.TemplatePath)'
+    </script>
+
+    @*<script src="~/Scripts/Pdf/pdf.js"></script>
+        <script src="~/Scripts/Pdf/pdf.worker.js"></script>
+        <script src="~/Scripts/Pdf/compatibility.js"></script>
+        <script src="~/Scripts/Pdf/l10n.js"></script>
+        <script src="~/Scripts/Pdf/viewer.js"></script>
+        <script src="~/Scripts/angular-ui/angular-pdfjs-viewer.js"></script>*@
+    <link href="~/Content/bootstrap-slider.min.css" rel="stylesheet" />
+    @*<link href="~/Content/Viewer.css" rel="stylesheet" />*@
+    <script src="~/Scripts/bootstrap-slider.min.js"></script>
+    <script src="~/Scripts/angular-ui/ngDraggable.js"></script>
+    <script src="~/Scripts/App/Controllers/EditFormController.js"></script>
+
+}

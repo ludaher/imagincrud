@@ -1,0 +1,7 @@
+﻿SELECT count(*)
+  FROM [dbo].{{TABLE_NAME}}
+  where ('{{TIPYNG_ID}}' = '' OR [TypingId] = '{{TIPYNG_ID}}')
+  AND ('{{FORM_ID}}' = '0' OR [FormId] = {{FORM_ID}})
+  AND ('{{MODIFIED_BY}}' = '' OR [ModifiedBy] = '{{MODIFIED_BY}}')
+  AND ('{{REGISTER_TYPE}}' = '0' OR [RegisterType] = {{REGISTER_TYPE}})
+  ORDER BY {{ORDER_COLUMN}} {{ORDER_DIRECTION}}

@@ -1,0 +1,72 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.TypingProcess>
+@using ImaginCrud.Entities
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('FormId')">
+                Número producto
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('FormId',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('FormId',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('TypingProcessId')">
+                Código de proceso
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('TypingProcessId',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('TypingProcessId',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('TypingStatus')">
+                Estado
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('TypingStatus',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('TypingStatus',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('CreatedOn')">
+                Fecha creación
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('CreatedOn',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('CreatedOn',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('ModifiedOn')">
+                Fecha modificación
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('ModifiedOn',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('ModifiedOn',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-1">
+        </th>
+        <th class="col-md-1">
+        </th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Número producto">
+                @Html.DisplayFor(modelItem => item.FormId)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Código del proceso">
+                @item.TypingProcessId
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Estado">
+                @(((ImaginCrud.Entities.ProcessStatus)item.TypingStatus).Description())
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Fecha de creación">
+                @item.CreatedOn.ToString("dd/MM/yyyy HH:mm:ss")
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Fecha de modificación">
+                @(item.ModifiedOn.HasValue ? item.ModifiedOn.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descargar">
+                @Html.ActionLink("Ver", "LoadFormContent", "FormsAdministrator", new { id = item.FormId, file = string.Format("{0}.pdf", item.TypingProcessId) }, new { target = "_blank" })
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descargar">
+                <a href="javascript:void(0);" ng-click="viewHistory('@(item.FormId)','@(item.TypingProcessId)')">Flujo</a>
+            </td>
+        </tr>
+    }
+</table>

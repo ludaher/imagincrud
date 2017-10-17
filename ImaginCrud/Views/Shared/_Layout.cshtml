@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/custom-functions.js"></script>
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link rel="icon" type="img/ico" href="~/favicon.ico">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Home")"><img src="~/Content/images/ImaginCrud/ImaginCrud_blanco-03.png" height="30" style="margin-top:12px;" /></a>
+                @*@Html.ActionLink("ImaginCrud", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+            otro elemento que se pueda ocultar al minimizar la barra -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        if (User.IsInRole(ImaginCrud.Entities.Constants.SECURITY_ROLE))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Seguridad <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Registrar usuario", "Register", "Account")</li>
+                                    <li>@Html.ActionLink("Roles", "Roles", "Security")</li>
+                                    <li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
+                                </ul>
+                            </li>
+                        }
+                        if (User.IsInRole(ImaginCrud.Entities.Constants.ADMINISTRATOR_ROLE))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Administración <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Clientes", "Index", "Customer")</li>
+                                    <li>@Html.ActionLink("Productos", "Forms", "FormsAdministrator")</li>
+                                    <li>@Html.ActionLink("Datos de selección", "ManageFieldSources", "FormsAdministrator")</li>
+                                </ul>
+                            </li>
+                        }
+                        if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE)
+                            || User.IsInRole(ImaginCrud.Entities.Constants.TYPIST_ROLE)
+                            || User.IsInRole(ImaginCrud.Entities.Constants.VALIDATOR_ROLE))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Productos <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Asignación de usuarios", "FormsToAssign", "FormsAdministrator")</li>
+                                    }
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.TYPIST_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Digitación", "AssignedForms", "Typist")</li>
+                                    }
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.VALIDATOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Validación", "AssignedForms", "Validator")</li>
+                                    }
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Procesos <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Procesos", "Processes", "Processes")</li>
+                                    }
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Consultas", "Forms", "Processes")</li>
+                                    }
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Cambio de prioridad", "Priority", "Processes")</li>
+                                    }
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Consultas <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole(ImaginCrud.Entities.Constants.SUPERVISOR_ROLE))
+                                    {
+                                        <li>@Html.ActionLink("Producción usuario", "ProcessesByUser", "Report")</li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
+
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div>
+            @*<div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>*@
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Alcaze</p>
+        </footer>
+    </div>
+    <div id="loadingDialog" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 15%; overflow-y: visible; display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="margin:0;">Procesando</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="progress progress-striped active" style="margin-bottom:0;">
+                        <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

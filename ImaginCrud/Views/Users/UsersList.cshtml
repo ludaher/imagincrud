@@ -1,0 +1,50 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Models.User>
+
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('UserName')">
+                Nombre de usuario
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('UserName',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('UserName',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-4">
+            <a href="javascript:void(0);" ng-click="changeOrder('Email')">
+                Correo electrónico
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Email',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Email',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-4">
+            Roles
+        </th>
+        <th class="col-md-1"></th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Nombre">
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descripción">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Descripción">
+                @string.Join("-", System.Web.Security.Roles.GetRolesForUser(item.UserName))
+            </td>
+
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.UserName }, new { @class = "btn btn-primary" })
+                </div>
+            </td>
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Contraseña", "ChangePassword", new { id = item.UserName }, new { @class = "btn btn-primary", alt="Cambiar contraseña" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>

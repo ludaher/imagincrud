@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "ProcessesByUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Producción</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-tasks"></i> Producción por usuario</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="TxtFrom">Desde (yyyy-MM-dd): </label>
+                    <input id="TxtFrom" name="TxtFrom" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="TxtTo">Hasta (yyyy-MM-dd): </label>
+                    <input id="TxtTo" name="TxtTo" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="DdlForm">Producto: </label>
+                    <input id="DdlForm" name="DdlForm" class="form-control" type="number" />
+                </div>
+            </div>
+        </div>
+        <div class="navbar  col-lg-12 ">
+            <div>
+                <input type="button" id="BtnGenerar" class="btn btn-primary" onclick="loadFrame()" value="Generar reporte" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<iframe id="reportFrame" width="100%" onload="onLoadFrame()" height="300"></iframe>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function onLoadFrame() {
+            $('#loadingDialog').modal('toggle');
+        }
+        function loadFrame() {
+            if ($('#TxtFrom').val() == '' || $('#TxtTo').val() == '') {
+                alert('Fecha desde y hasta es obligatoria.');
+                return;
+            }
+            if ($('#DdlForm').val() == '') {
+                alert('El proceso es obligatorio.');
+                return;
+            }
+            $('#loadingDialog').modal();
+            var queryString = "?FormId=" + $('#DdlForm').val() + "&From=" + encodeURI($('#TxtFrom').val()) + '&To=' + encodeURI($('#TxtTo').val());
+            $('#reportFrame').attr('src', '@Url.Content("~/Reports/ProductionSummaryByUser.aspx")' + queryString);
+        }
+    </script>
+
+}

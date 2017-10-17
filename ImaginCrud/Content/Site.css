@@ -1,0 +1,449 @@
+﻿@import "forms.less";
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    min-width: 1000px !important;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+a {
+    color: #1B6534;
+}
+
+    a:hover {
+        color: #3EA335;
+    }
+
+.btn-primary {
+    background-color:#007EB7;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary
+{
+    background-color:#11598C;
+
+}
+.pdf-viewer {
+    float: left;
+    width: 1100px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .pdf-viewer #viewer {
+        width: 1050px;
+        height: 15000px;
+        position: absolute;
+        top: -50px;
+        left: 50px;
+        zoom: 1;
+    }
+
+
+        .pdf-viewer #viewer.rotate180 {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+    .pdf-viewer .slider-vertical {
+        height: 480px !important;
+        margin-top: 10px;
+    }
+
+    .pdf-viewer .pdf-options {
+        position: relative;
+        left: 50%;
+        /*width: 300px;*/
+        opacity: 0.7;
+        max-height: 400px;
+        z-index: 20;
+    }
+
+    .pdf-viewer .form-base-edit {
+        position: relative;
+        left: 695px;
+        width: 300px;
+        opacity: 0.7;
+        max-height: 400px;
+        overflow: auto;
+        margin: 0;
+    }
+
+    .pdf-viewer .form-options {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+        opacity: 0.7;
+        /*   display:none;*/
+    }
+
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        /*position: fixed;
+        left: 0px;
+        bottom: 0px;*/
+        width: 100%;
+        max-height: 400px;
+        overflow: auto;
+        height: 50%;
+        margin: 0;
+    }
+
+
+    .pdf-viewer .form-data {
+        height: 300px;
+    }
+
+    .pdf-viewer .form-fields-edit .clearfix {
+        z-index: 5;
+    }
+
+    .pdf-viewer .form-fields-edit .form-group {
+        z-index: 6;
+        border: 1px solid #fff;
+        padding: 0 !important;
+        margin-bottom: 5px;
+    }
+
+        .pdf-viewer .form-fields-edit .form-group:hover {
+            border: 1px solid #000;
+        }
+
+        .pdf-viewer .form-fields-edit .form-group.selected {
+            border: 1px solid #428bca;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 100%-40px;
+    }
+
+    .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+        height: 100%-40px;
+    }
+
+    .pdf-viewer .form-fields-edit .panel-heading .form-control {
+        width: 200px;
+        margin-right: 50px;
+        display: inline-block;
+    }
+
+    .pdf-viewer .form-fields-edit .templates-panel {
+        overflow: auto;
+        height: 80px;
+        padding-top: 10px;
+        opacity: 0.7;
+    }
+
+    .pdf-viewer .form-fields-edit .work-area-panel, .form-data .work-area-panel {
+        max-width: 1050px;
+        margin: 0 auto;
+    }
+
+    .pdf-viewer .form-fields-capture {
+        height: 260px;
+    }
+
+        .pdf-viewer .form-fields-capture .form-group:hover {
+            border: 1px solid #fff;
+        }
+
+        .pdf-viewer .form-fields-capture .form-group.selected {
+            border: 1px solid #fff;
+        }
+
+
+
+
+.action-field {
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #afafaf;
+}
+
+    .action-field .btn {
+        margin: 1px;
+        width: 40px;
+    }
+
+.pdf-viewer .pdf-options .pre-scrollable {
+    max-height: 290px;
+}
+
+.pdf-viewer .pdf-options:hover, .pdf-viewer .form-fields-edit:hover, .pdf-viewer .form-base-edit:hover, .pdf-viewer .form-fields-edit .templates-panel:hover, .pdf-viewer .form-options:hover {
+    opacity: 1;
+}
+
+.pdf-viewer .pdf-options .pre-scrollable .slider.slider-horizontal {
+    width: 200px;
+}
+
+.section-config {
+    display: none;
+}
+
+    .section-config.show {
+        display: block;
+    }
+
+.float-right.pdf-options {
+    float: right;
+    width: 300px;
+    height: 600px;
+}
+
+    .float-right.pdf-options .pre-scrollable {
+        max-height: 500px;
+    }
+
+.pagining-control.page {
+    width: 40px;
+    text-align: center;
+}
+
+.center_div {
+    margin: 0 auto;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+
+/*DRAG AND DROP*/
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+[ng-drag] {
+    cursor: move;
+}
+
+    [ng-drag].drag-over {
+        border: solid 1px red;
+    }
+
+    [ng-drag].dragging {
+        opacity: 0.5;
+    }
+
+[ng-drop] {
+}
+
+    [ng-drop].drag-enter {
+        border: solid 5px red;
+    }
+
+    [ng-drop] div {
+        position: relative;
+        /*z-index: 2;*/
+    }
+
+label.form-control {
+    margin: 0;
+}
+
+.field-properties {
+    width: 75%;
+    position: fixed;
+    left: 50%;
+    top: 100px;
+    max-height: 70%;
+    margin-left: -37.5%;
+    max-height: 400px;
+    z-index: 13;
+}
+/*.form-group-date{
+    margin:2px;
+}*/
+.menu-options {
+    z-index: 10;
+    background: #fff;
+    width: 100%;
+    border: 1px solid #fff;
+}
+
+.nav-pills .closeTab {
+    z-index: 3;
+    margin-left: 5px;
+}
+
+.slide-panel .slider-horizontal {
+    /*margin-left:50px;*/
+    width: 100% !important;
+}
+
+.form-actions {
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    margin: 20px;
+    z-index: 11;
+}
+
+.form-actions-left {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    margin: 20px;
+    z-index: 11;
+}
+
+.error {
+    color: #cc1c14;
+}
+
+.success {
+    color: #468847;
+}
+
+.has-error button {
+    border-color: #b94a48;
+}
+
+.has-success button {
+    border-color: #468847;
+}
+
+.has-warning button {
+    border-color: #c09853;
+}
+
+#outerContainer #mainContainer div.toolbar, #outerContainer #mainContainer div.findbar, #outerContainer #mainContainer div.secondaryToolbar {
+    display: none !important; /* hide PDF viewer toolbar */
+}
+
+#outerContainer #mainContainer #viewerContainer {
+    top: 0 !important; /* move doc up into empty bar space */
+}
+
+@media screen and (max-height: 500px) {
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        height: 200px;
+    }
+
+        .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+            height: 90px;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 155px;
+    }
+}
+
+@media screen and (min-height: 500px) {
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        height: 300px;
+    }
+
+        .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+            height: 160px;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 250px;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        height: 300px;
+    }
+
+        .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+            height: 160px;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 240px;
+    }
+}
+
+@media screen and (min-height: 700px) {
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        height: 470px;
+    }
+
+        .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+            height: 280px;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 360px;
+    }
+}
+
+@media screen and (min-height: 700px) {
+    .pdf-viewer .form-fields-edit, .pdf-viewer .form-data {
+        height: 570px;
+    }
+
+        .pdf-viewer .form-fields-edit .pre-scrollable, .pdf-viewer .form-base-edit .pre-scrollable {
+            height: 300px;
+        }
+
+    .pdf-viewer .form-fields-capture .pre-scrollable {
+        height: 460px;
+    }
+}
+
+.navbar-inverse .navbar-nav>li>a
+{
+	color:#fafafa;
+}
+
+.navbar-inverse, .panel-primary > .panel-heading {
+    background-color: #007EB7;
+    font-weight: bold;
+    border-bottom: 1px solid #BB1175;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus
+{
+    background-color: #11598C;
+
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #BB1175;
+}
+
+.navbar-inverse a:hover {
+    color: #BB1175;
+}
+
+/*
+    color:#3EA335;///Verde claro
+    color:#1B6534;///Verde oscuro
+    color:#BB1175;///Magenta
+    #10A9E2//Azul claro
+    color:#007EB7;///Azul medio
+    #11598C///Azul oscuro
+    #EE7501///Naranja oscuro
+    #F6A319///Naranja claro
+
+*/

@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ExportForms" targetNamespace="http://tempuri.org/ExportForms.xsd" xmlns:mstns="http://tempuri.org/ExportForms.xsd" xmlns="http://tempuri.org/ExportForms.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ImaginCrudConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ImaginCrudConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ImaginCrudConnection.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DefaultConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DefaultConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DefaultConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Form_2_AllTableAdapter" GeneratorDataComponentClassName="Form_2_AllTableAdapter" Name="Form_2_All" UserDataComponentName="Form_2_AllTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ImaginCrudConnection (Web.config)" DbObjectName="ImaginCrud.dbo.Form_2_All" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT FormId, TypingProcessId, FormDataId, ModifiedOn, [DocumentoBeneficiario],[FechaNacimientoBeneficiario],[ParentescoBeneficiario],[PrimerApellidoBeneficiario],[PrimerNombreBeneficiario],[SegundoApellidoBeneficiario],[SegundoNombreBeneficiario],[SexoBeneficiario],[TipoDocumentoBeneficiario],
+     null as [ActivoEPSAnterior],null as [AdministradoradePensiones_AFP],null as [Administradora_ARL],null as [CausaldeIngreso],null as [CelularCotizante],null as [CiudadCotizante],null as [CódigoAsesorComercial],null as [CorreoElectrónicoCotizante],null as [CorreoElectrónicoEmpleador],null as [DirecciónCotizante],null as [DirecciónEmpleador],null as [EpsAnteriorCotizante],null as [FechaIngresoCotizante42.Fecha],null as [FechaNacimientoCotizante],null as [FechaRadicaciòn],null as [IngresoBasedeCotizante],null as [IPSMedicaCotizante],null as [IPSOdontologicaCotizante],null as [MunicipiooCiudadEmpleador],null as [NombreoRazónSocial], [Númerodesolicitud],null as [NúmeroDocumentoEmpleador],null as [NumeroIdentificaciónCotizante],null as [PrimerApellidoCotizante],null as [PrimerApellidoEmpresa],null as [PrimerNombreCotizante],null as [PrimerNombreEmpresa],null as [RegimenA_1B_2],null as [SegundoApellidoEmpresa],null as [SegundoApellidoCotizante],null as [SegundoNombreCotizante],null as [SegundoNombreEmpresa],null as [SexoCotizante1_Femenino2_Masculino],null as [SucursalRadicación],null as [TeléfonoFijoCotizante],null as [TeléfonoFijoEmpleador],null as [TipoCotizanteA_1B_2C_3],null as [TipoCotizante],null as [TipodeNovedad],null as [TipoDocumentoEmpleador],null as [TipoIdentificaciónCotizante],null as [TrámiteAfiliación_1Novedad_2],null as [ZonaResidencialCotizante]
+    FROM Form_2_All
+    where 1=0 OR [DocumentoBeneficiario] IS NOT NULL  OR [FechaNacimientoBeneficiario] IS NOT NULL  OR [ParentescoBeneficiario] IS NOT NULL  OR [PrimerApellidoBeneficiario] IS NOT NULL  OR [PrimerNombreBeneficiario] IS NOT NULL  OR [SegundoApellidoBeneficiario] IS NOT NULL  OR [SegundoNombreBeneficiario] IS NOT NULL  OR [SexoBeneficiario] IS NOT NULL  OR [TipoDocumentoBeneficiario] IS NOT NULL  
+	--AS detail
+   UNION
+   SELECT FormId, TypingProcessId, FormDataId, ModifiedOn,null as [DocumentoBeneficiario],null as [FechaNacimientoBeneficiario],null as [ParentescoBeneficiario],null as [PrimerApellidoBeneficiario],null as [PrimerNombreBeneficiario],null as [SegundoApellidoBeneficiario],null as [SegundoNombreBeneficiario],null as [SexoBeneficiario],null as [TipoDocumentoBeneficiario],
+   [ActivoEPSAnterior],[AdministradoradePensiones_AFP],[Administradora_ARL],[CausaldeIngreso],[CelularCotizante],[CiudadCotizante],[CódigoAsesorComercial],[CorreoElectrónicoCotizante],[CorreoElectrónicoEmpleador],[DirecciónCotizante],[DirecciónEmpleador],[EpsAnteriorCotizante],[FechaIngresoCotizante42.Fecha],[FechaNacimientoCotizante],[FechaRadicaciòn],[IngresoBasedeCotizante],[IPSMedicaCotizante],[IPSOdontologicaCotizante],[MunicipiooCiudadEmpleador],[NombreoRazónSocial],[Númerodesolicitud],[NúmeroDocumentoEmpleador],[NumeroIdentificaciónCotizante],[PrimerApellidoCotizante],[PrimerApellidoEmpresa],[PrimerNombreCotizante],[PrimerNombreEmpresa],[RegimenA_1B_2],[SegundoApellidoEmpresa],[SegundoApellidoCotizante],[SegundoNombreCotizante],[SegundoNombreEmpresa],[SexoCotizante1_Femenino2_Masculino],[SucursalRadicación],[TeléfonoFijoCotizante],[TeléfonoFijoEmpleador],[TipoCotizanteA_1B_2C_3],[TipoCotizante],[TipodeNovedad],[TipoDocumentoEmpleador],[TipoIdentificaciónCotizante],[TrámiteAfiliación_1Novedad_2],[ZonaResidencialCotizante]
+   FROM Form_2_All
+   GROUP BY FormId, TypingProcessId, FormDataId, ModifiedOn, [DocumentoBeneficiario],[FechaNacimientoBeneficiario],[ParentescoBeneficiario],[PrimerApellidoBeneficiario],[PrimerNombreBeneficiario],[SegundoApellidoBeneficiario],[SegundoNombreBeneficiario],[SexoBeneficiario],[TipoDocumentoBeneficiario],
+   [ActivoEPSAnterior],[AdministradoradePensiones_AFP],[Administradora_ARL],[CausaldeIngreso],[CelularCotizante],[CiudadCotizante],[CódigoAsesorComercial],[CorreoElectrónicoCotizante],[CorreoElectrónicoEmpleador],[DirecciónCotizante],[DirecciónEmpleador],[EpsAnteriorCotizante],[FechaIngresoCotizante42.Fecha],[FechaNacimientoCotizante],[FechaRadicaciòn],[IngresoBasedeCotizante],[IPSMedicaCotizante],[IPSOdontologicaCotizante],[MunicipiooCiudadEmpleador],[NombreoRazónSocial],[Númerodesolicitud],[NúmeroDocumentoEmpleador],[NumeroIdentificaciónCotizante],[PrimerApellidoCotizante],[PrimerApellidoEmpresa],[PrimerNombreCotizante],[PrimerNombreEmpresa],[RegimenA_1B_2],[SegundoApellidoEmpresa],[SegundoApellidoCotizante],[SegundoNombreCotizante],[SegundoNombreEmpresa],[SexoCotizante1_Femenino2_Masculino],[SucursalRadicación],[TeléfonoFijoCotizante],[TeléfonoFijoEmpleador],[TipoCotizanteA_1B_2C_3],[TipoCotizante],[TipodeNovedad],[TipoDocumentoEmpleador],[TipoIdentificaciónCotizante],[TrámiteAfiliación_1Novedad_2],[ZonaResidencialCotizante]</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TypingProcessId" DataSetColumn="TypingProcessId" />
+              <Mapping SourceColumn="ActivoEPSAnterior" DataSetColumn="ActivoEPSAnterior" />
+              <Mapping SourceColumn="AdministradoradePensiones_AFP" DataSetColumn="AdministradoradePensiones_AFP" />
+              <Mapping SourceColumn="Administradora_ARL" DataSetColumn="Administradora_ARL" />
+              <Mapping SourceColumn="CelularCotizante" DataSetColumn="CelularCotizante" />
+              <Mapping SourceColumn="CiudadCotizante" DataSetColumn="CiudadCotizante" />
+              <Mapping SourceColumn="CódigoAsesorComercial" DataSetColumn="CódigoAsesorComercial" />
+              <Mapping SourceColumn="CorreoElectrónicoCotizante" DataSetColumn="CorreoElectrónicoCotizante" />
+              <Mapping SourceColumn="CorreoElectrónicoEmpleador" DataSetColumn="CorreoElectrónicoEmpleador" />
+              <Mapping SourceColumn="DirecciónCotizante" DataSetColumn="DirecciónCotizante" />
+              <Mapping SourceColumn="DirecciónEmpleador" DataSetColumn="DirecciónEmpleador" />
+              <Mapping SourceColumn="EpsAnteriorCotizante" DataSetColumn="EpsAnteriorCotizante" />
+              <Mapping SourceColumn="FechaNacimientoCotizante" DataSetColumn="FechaNacimientoCotizante" />
+              <Mapping SourceColumn="FechaRadicaciòn" DataSetColumn="FechaRadicaciòn" />
+              <Mapping SourceColumn="IngresoBasedeCotizante" DataSetColumn="IngresoBasedeCotizante" />
+              <Mapping SourceColumn="IPSMedicaCotizante" DataSetColumn="IPSMedicaCotizante" />
+              <Mapping SourceColumn="IPSOdontologicaCotizante" DataSetColumn="IPSOdontologicaCotizante" />
+              <Mapping SourceColumn="MunicipiooCiudadEmpleador" DataSetColumn="MunicipiooCiudadEmpleador" />
+              <Mapping SourceColumn="NombreoRazónSocial" DataSetColumn="NombreoRazónSocial" />
+              <Mapping SourceColumn="Númerodesolicitud" DataSetColumn="Númerodesolicitud" />
+              <Mapping SourceColumn="NúmeroDocumentoEmpleador" DataSetColumn="NúmeroDocumentoEmpleador" />
+              <Mapping SourceColumn="NumeroIdentificaciónCotizante" DataSetColumn="NumeroIdentificaciónCotizante" />
+              <Mapping SourceColumn="PrimerApellidoCotizante" DataSetColumn="PrimerApellidoCotizante" />
+              <Mapping SourceColumn="PrimerNombreCotizante" DataSetColumn="PrimerNombreCotizante" />
+              <Mapping SourceColumn="SegundoApellidoCotizante" DataSetColumn="SegundoApellidoCotizante" />
+              <Mapping SourceColumn="SegundoNombreCotizante" DataSetColumn="SegundoNombreCotizante" />
+              <Mapping SourceColumn="SexoCotizante1_Femenino2_Masculino" DataSetColumn="SexoCotizante1_Femenino2_Masculino" />
+              <Mapping SourceColumn="TeléfonoFijoCotizante" DataSetColumn="TeléfonoFijoCotizante" />
+              <Mapping SourceColumn="TeléfonoFijoEmpleador" DataSetColumn="TeléfonoFijoEmpleador" />
+              <Mapping SourceColumn="TipoCotizante" DataSetColumn="TipoCotizante" />
+              <Mapping SourceColumn="TipoDocumentoEmpleador" DataSetColumn="TipoDocumentoEmpleador" />
+              <Mapping SourceColumn="TipoIdentificaciónCotizante" DataSetColumn="TipoIdentificaciónCotizante" />
+              <Mapping SourceColumn="TrámiteAfiliación_1Novedad_2" DataSetColumn="TrámiteAfiliación_1Novedad_2" />
+              <Mapping SourceColumn="ZonaResidencialCotizante" DataSetColumn="ZonaResidencialCotizante" />
+              <Mapping SourceColumn="DocumentoBeneficiario" DataSetColumn="DocumentoBeneficiario" />
+              <Mapping SourceColumn="FechaNacimientoBeneficiario" DataSetColumn="FechaNacimientoBeneficiario" />
+              <Mapping SourceColumn="ParentescoBeneficiario" DataSetColumn="ParentescoBeneficiario" />
+              <Mapping SourceColumn="PrimerApellidoBeneficiario" DataSetColumn="PrimerApellidoBeneficiario" />
+              <Mapping SourceColumn="PrimerNombreBeneficiario" DataSetColumn="PrimerNombreBeneficiario" />
+              <Mapping SourceColumn="SegundoApellidoBeneficiario" DataSetColumn="SegundoApellidoBeneficiario" />
+              <Mapping SourceColumn="SegundoNombreBeneficiario" DataSetColumn="SegundoNombreBeneficiario" />
+              <Mapping SourceColumn="SexoBeneficiario" DataSetColumn="SexoBeneficiario" />
+              <Mapping SourceColumn="TipoDocumentoBeneficiario" DataSetColumn="TipoDocumentoBeneficiario" />
+              <Mapping SourceColumn="CausaldeIngreso" DataSetColumn="CausaldeIngreso" />
+              <Mapping SourceColumn="TipodeNovedad" DataSetColumn="TipodeNovedad" />
+              <Mapping SourceColumn="TipoCotizanteA_1B_2C_3" DataSetColumn="TipoCotizanteA_1B_2C_3" />
+              <Mapping SourceColumn="FormDataId" DataSetColumn="FormDataId" />
+              <Mapping SourceColumn="ModifiedOn" DataSetColumn="ModifiedOn" />
+              <Mapping SourceColumn="RegimenA_1B_2" DataSetColumn="RegimenA_1B_2" />
+              <Mapping SourceColumn="PrimerApellidoEmpresa" DataSetColumn="PrimerApellidoEmpresa" />
+              <Mapping SourceColumn="PrimerNombreEmpresa" DataSetColumn="PrimerNombreEmpresa" />
+              <Mapping SourceColumn="SegundoApellidoEmpresa" DataSetColumn="SegundoApellidoEmpresa" />
+              <Mapping SourceColumn="SegundoNombreEmpresa" DataSetColumn="SegundoNombreEmpresa" />
+              <Mapping SourceColumn="SucursalRadicación" DataSetColumn="SucursalRadicación" />
+              <Mapping SourceColumn="FormId" DataSetColumn="FormId" />
+              <Mapping SourceColumn="FechaIngresoCotizante42.Fecha" DataSetColumn="FechaIngresoCotizante42_Fecha" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ExportForms" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ExportForms" msprop:Generator_UserDSName="ExportForms">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Form_2_All" msprop:Generator_TableClassName="Form_2_AllDataTable" msprop:Generator_TableVarName="tableForm_2_All" msprop:Generator_TablePropName="Form_2_All" msprop:Generator_RowDeletingName="Form_2_AllRowDeleting" msprop:Generator_RowChangingName="Form_2_AllRowChanging" msprop:Generator_RowEvHandlerName="Form_2_AllRowChangeEventHandler" msprop:Generator_RowDeletedName="Form_2_AllRowDeleted" msprop:Generator_UserTableName="Form_2_All" msprop:Generator_RowChangedName="Form_2_AllRowChanged" msprop:Generator_RowEvArgName="Form_2_AllRowChangeEvent" msprop:Generator_RowClassName="Form_2_AllRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TypingProcessId" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTypingProcessId" msprop:Generator_ColumnPropNameInRow="TypingProcessId" msprop:Generator_ColumnPropNameInTable="TypingProcessIdColumn" msprop:Generator_UserColumnName="TypingProcessId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ActivoEPSAnterior" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnActivoEPSAnterior" msprop:Generator_ColumnPropNameInRow="ActivoEPSAnterior" msprop:Generator_ColumnPropNameInTable="ActivoEPSAnteriorColumn" msprop:Generator_UserColumnName="ActivoEPSAnterior" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AdministradoradePensiones_AFP" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAdministradoradePensiones_AFP" msprop:Generator_ColumnPropNameInRow="AdministradoradePensiones_AFP" msprop:Generator_ColumnPropNameInTable="AdministradoradePensiones_AFPColumn" msprop:Generator_UserColumnName="AdministradoradePensiones_AFP" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Administradora_ARL" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAdministradora_ARL" msprop:Generator_ColumnPropNameInRow="Administradora_ARL" msprop:Generator_ColumnPropNameInTable="Administradora_ARLColumn" msprop:Generator_UserColumnName="Administradora_ARL" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CelularCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCelularCotizante" msprop:Generator_ColumnPropNameInRow="CelularCotizante" msprop:Generator_ColumnPropNameInTable="CelularCotizanteColumn" msprop:Generator_UserColumnName="CelularCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CiudadCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCiudadCotizante" msprop:Generator_ColumnPropNameInRow="CiudadCotizante" msprop:Generator_ColumnPropNameInTable="CiudadCotizanteColumn" msprop:Generator_UserColumnName="CiudadCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CódigoAsesorComercial" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCódigoAsesorComercial" msprop:Generator_ColumnPropNameInRow="CódigoAsesorComercial" msprop:Generator_ColumnPropNameInTable="CódigoAsesorComercialColumn" msprop:Generator_UserColumnName="CódigoAsesorComercial" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CorreoElectrónicoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCorreoElectrónicoCotizante" msprop:Generator_ColumnPropNameInRow="CorreoElectrónicoCotizante" msprop:Generator_ColumnPropNameInTable="CorreoElectrónicoCotizanteColumn" msprop:Generator_UserColumnName="CorreoElectrónicoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CorreoElectrónicoEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCorreoElectrónicoEmpleador" msprop:Generator_ColumnPropNameInRow="CorreoElectrónicoEmpleador" msprop:Generator_ColumnPropNameInTable="CorreoElectrónicoEmpleadorColumn" msprop:Generator_UserColumnName="CorreoElectrónicoEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DirecciónCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDirecciónCotizante" msprop:Generator_ColumnPropNameInRow="DirecciónCotizante" msprop:Generator_ColumnPropNameInTable="DirecciónCotizanteColumn" msprop:Generator_UserColumnName="DirecciónCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DirecciónEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDirecciónEmpleador" msprop:Generator_ColumnPropNameInRow="DirecciónEmpleador" msprop:Generator_ColumnPropNameInTable="DirecciónEmpleadorColumn" msprop:Generator_UserColumnName="DirecciónEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EpsAnteriorCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEpsAnteriorCotizante" msprop:Generator_ColumnPropNameInRow="EpsAnteriorCotizante" msprop:Generator_ColumnPropNameInTable="EpsAnteriorCotizanteColumn" msprop:Generator_UserColumnName="EpsAnteriorCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaNacimientoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaNacimientoCotizante" msprop:Generator_ColumnPropNameInRow="FechaNacimientoCotizante" msprop:Generator_ColumnPropNameInTable="FechaNacimientoCotizanteColumn" msprop:Generator_UserColumnName="FechaNacimientoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaRadicaciòn" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaRadicaciòn" msprop:Generator_ColumnPropNameInRow="FechaRadicaciòn" msprop:Generator_ColumnPropNameInTable="FechaRadicaciònColumn" msprop:Generator_UserColumnName="FechaRadicaciòn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IngresoBasedeCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIngresoBasedeCotizante" msprop:Generator_ColumnPropNameInRow="IngresoBasedeCotizante" msprop:Generator_ColumnPropNameInTable="IngresoBasedeCotizanteColumn" msprop:Generator_UserColumnName="IngresoBasedeCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IPSMedicaCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIPSMedicaCotizante" msprop:Generator_ColumnPropNameInRow="IPSMedicaCotizante" msprop:Generator_ColumnPropNameInTable="IPSMedicaCotizanteColumn" msprop:Generator_UserColumnName="IPSMedicaCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IPSOdontologicaCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIPSOdontologicaCotizante" msprop:Generator_ColumnPropNameInRow="IPSOdontologicaCotizante" msprop:Generator_ColumnPropNameInTable="IPSOdontologicaCotizanteColumn" msprop:Generator_UserColumnName="IPSOdontologicaCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MunicipiooCiudadEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnMunicipiooCiudadEmpleador" msprop:Generator_ColumnPropNameInRow="MunicipiooCiudadEmpleador" msprop:Generator_ColumnPropNameInTable="MunicipiooCiudadEmpleadorColumn" msprop:Generator_UserColumnName="MunicipiooCiudadEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreoRazónSocial" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombreoRazónSocial" msprop:Generator_ColumnPropNameInRow="NombreoRazónSocial" msprop:Generator_ColumnPropNameInTable="NombreoRazónSocialColumn" msprop:Generator_UserColumnName="NombreoRazónSocial" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Númerodesolicitud" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNúmerodesolicitud" msprop:Generator_ColumnPropNameInRow="Númerodesolicitud" msprop:Generator_ColumnPropNameInTable="NúmerodesolicitudColumn" msprop:Generator_UserColumnName="Númerodesolicitud" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NúmeroDocumentoEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNúmeroDocumentoEmpleador" msprop:Generator_ColumnPropNameInRow="NúmeroDocumentoEmpleador" msprop:Generator_ColumnPropNameInTable="NúmeroDocumentoEmpleadorColumn" msprop:Generator_UserColumnName="NúmeroDocumentoEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NumeroIdentificaciónCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNumeroIdentificaciónCotizante" msprop:Generator_ColumnPropNameInRow="NumeroIdentificaciónCotizante" msprop:Generator_ColumnPropNameInTable="NumeroIdentificaciónCotizanteColumn" msprop:Generator_UserColumnName="NumeroIdentificaciónCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerApellidoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerApellidoCotizante" msprop:Generator_ColumnPropNameInRow="PrimerApellidoCotizante" msprop:Generator_ColumnPropNameInTable="PrimerApellidoCotizanteColumn" msprop:Generator_UserColumnName="PrimerApellidoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerNombreCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerNombreCotizante" msprop:Generator_ColumnPropNameInRow="PrimerNombreCotizante" msprop:Generator_ColumnPropNameInTable="PrimerNombreCotizanteColumn" msprop:Generator_UserColumnName="PrimerNombreCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoApellidoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoApellidoCotizante" msprop:Generator_ColumnPropNameInRow="SegundoApellidoCotizante" msprop:Generator_ColumnPropNameInTable="SegundoApellidoCotizanteColumn" msprop:Generator_UserColumnName="SegundoApellidoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoNombreCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoNombreCotizante" msprop:Generator_ColumnPropNameInRow="SegundoNombreCotizante" msprop:Generator_ColumnPropNameInTable="SegundoNombreCotizanteColumn" msprop:Generator_UserColumnName="SegundoNombreCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SexoCotizante1_Femenino2_Masculino" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSexoCotizante1_Femenino2_Masculino" msprop:Generator_ColumnPropNameInRow="SexoCotizante1_Femenino2_Masculino" msprop:Generator_ColumnPropNameInTable="SexoCotizante1_Femenino2_MasculinoColumn" msprop:Generator_UserColumnName="SexoCotizante1_Femenino2_Masculino" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TeléfonoFijoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTeléfonoFijoCotizante" msprop:Generator_ColumnPropNameInRow="TeléfonoFijoCotizante" msprop:Generator_ColumnPropNameInTable="TeléfonoFijoCotizanteColumn" msprop:Generator_UserColumnName="TeléfonoFijoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TeléfonoFijoEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTeléfonoFijoEmpleador" msprop:Generator_ColumnPropNameInRow="TeléfonoFijoEmpleador" msprop:Generator_ColumnPropNameInTable="TeléfonoFijoEmpleadorColumn" msprop:Generator_UserColumnName="TeléfonoFijoEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipoCotizante" msprop:Generator_ColumnPropNameInRow="TipoCotizante" msprop:Generator_ColumnPropNameInTable="TipoCotizanteColumn" msprop:Generator_UserColumnName="TipoCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocumentoEmpleador" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipoDocumentoEmpleador" msprop:Generator_ColumnPropNameInRow="TipoDocumentoEmpleador" msprop:Generator_ColumnPropNameInTable="TipoDocumentoEmpleadorColumn" msprop:Generator_UserColumnName="TipoDocumentoEmpleador" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoIdentificaciónCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipoIdentificaciónCotizante" msprop:Generator_ColumnPropNameInRow="TipoIdentificaciónCotizante" msprop:Generator_ColumnPropNameInTable="TipoIdentificaciónCotizanteColumn" msprop:Generator_UserColumnName="TipoIdentificaciónCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrámiteAfiliación_1Novedad_2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTrámiteAfiliación_1Novedad_2" msprop:Generator_ColumnPropNameInRow="TrámiteAfiliación_1Novedad_2" msprop:Generator_ColumnPropNameInTable="TrámiteAfiliación_1Novedad_2Column" msprop:Generator_UserColumnName="TrámiteAfiliación_1Novedad_2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ZonaResidencialCotizante" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnZonaResidencialCotizante" msprop:Generator_ColumnPropNameInRow="ZonaResidencialCotizante" msprop:Generator_ColumnPropNameInTable="ZonaResidencialCotizanteColumn" msprop:Generator_UserColumnName="ZonaResidencialCotizante" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocumentoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDocumentoBeneficiario" msprop:Generator_ColumnPropNameInRow="DocumentoBeneficiario" msprop:Generator_ColumnPropNameInTable="DocumentoBeneficiarioColumn" msprop:Generator_UserColumnName="DocumentoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaNacimientoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaNacimientoBeneficiario" msprop:Generator_ColumnPropNameInRow="FechaNacimientoBeneficiario" msprop:Generator_ColumnPropNameInTable="FechaNacimientoBeneficiarioColumn" msprop:Generator_UserColumnName="FechaNacimientoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ParentescoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnParentescoBeneficiario" msprop:Generator_ColumnPropNameInRow="ParentescoBeneficiario" msprop:Generator_ColumnPropNameInTable="ParentescoBeneficiarioColumn" msprop:Generator_UserColumnName="ParentescoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerApellidoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerApellidoBeneficiario" msprop:Generator_ColumnPropNameInRow="PrimerApellidoBeneficiario" msprop:Generator_ColumnPropNameInTable="PrimerApellidoBeneficiarioColumn" msprop:Generator_UserColumnName="PrimerApellidoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerNombreBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerNombreBeneficiario" msprop:Generator_ColumnPropNameInRow="PrimerNombreBeneficiario" msprop:Generator_ColumnPropNameInTable="PrimerNombreBeneficiarioColumn" msprop:Generator_UserColumnName="PrimerNombreBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoApellidoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoApellidoBeneficiario" msprop:Generator_ColumnPropNameInRow="SegundoApellidoBeneficiario" msprop:Generator_ColumnPropNameInTable="SegundoApellidoBeneficiarioColumn" msprop:Generator_UserColumnName="SegundoApellidoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoNombreBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoNombreBeneficiario" msprop:Generator_ColumnPropNameInRow="SegundoNombreBeneficiario" msprop:Generator_ColumnPropNameInTable="SegundoNombreBeneficiarioColumn" msprop:Generator_UserColumnName="SegundoNombreBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SexoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSexoBeneficiario" msprop:Generator_ColumnPropNameInRow="SexoBeneficiario" msprop:Generator_ColumnPropNameInTable="SexoBeneficiarioColumn" msprop:Generator_UserColumnName="SexoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocumentoBeneficiario" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipoDocumentoBeneficiario" msprop:Generator_ColumnPropNameInRow="TipoDocumentoBeneficiario" msprop:Generator_ColumnPropNameInTable="TipoDocumentoBeneficiarioColumn" msprop:Generator_UserColumnName="TipoDocumentoBeneficiario" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CausaldeIngreso" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCausaldeIngreso" msprop:Generator_ColumnPropNameInRow="CausaldeIngreso" msprop:Generator_ColumnPropNameInTable="CausaldeIngresoColumn" msprop:Generator_UserColumnName="CausaldeIngreso" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipodeNovedad" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipodeNovedad" msprop:Generator_ColumnPropNameInRow="TipodeNovedad" msprop:Generator_ColumnPropNameInTable="TipodeNovedadColumn" msprop:Generator_UserColumnName="TipodeNovedad" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoCotizanteA_1B_2C_3" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTipoCotizanteA_1B_2C_3" msprop:Generator_ColumnPropNameInRow="TipoCotizanteA_1B_2C_3" msprop:Generator_ColumnPropNameInTable="TipoCotizanteA_1B_2C_3Column" msprop:Generator_UserColumnName="TipoCotizanteA_1B_2C_3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FormDataId" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFormDataId" msprop:Generator_ColumnPropNameInRow="FormDataId" msprop:Generator_ColumnPropNameInTable="FormDataIdColumn" msprop:Generator_UserColumnName="FormDataId" type="xs:int" minOccurs="0" />
+              <xs:element name="ModifiedOn" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnModifiedOn" msprop:Generator_ColumnPropNameInRow="ModifiedOn" msprop:Generator_ColumnPropNameInTable="ModifiedOnColumn" msprop:Generator_UserColumnName="ModifiedOn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RegimenA_1B_2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRegimenA_1B_2" msprop:Generator_ColumnPropNameInRow="RegimenA_1B_2" msprop:Generator_ColumnPropNameInTable="RegimenA_1B_2Column" msprop:Generator_UserColumnName="RegimenA_1B_2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerApellidoEmpresa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerApellidoEmpresa" msprop:Generator_ColumnPropNameInRow="PrimerApellidoEmpresa" msprop:Generator_ColumnPropNameInTable="PrimerApellidoEmpresaColumn" msprop:Generator_UserColumnName="PrimerApellidoEmpresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrimerNombreEmpresa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPrimerNombreEmpresa" msprop:Generator_ColumnPropNameInRow="PrimerNombreEmpresa" msprop:Generator_ColumnPropNameInTable="PrimerNombreEmpresaColumn" msprop:Generator_UserColumnName="PrimerNombreEmpresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoApellidoEmpresa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoApellidoEmpresa" msprop:Generator_ColumnPropNameInRow="SegundoApellidoEmpresa" msprop:Generator_ColumnPropNameInTable="SegundoApellidoEmpresaColumn" msprop:Generator_UserColumnName="SegundoApellidoEmpresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SegundoNombreEmpresa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSegundoNombreEmpresa" msprop:Generator_ColumnPropNameInRow="SegundoNombreEmpresa" msprop:Generator_ColumnPropNameInTable="SegundoNombreEmpresaColumn" msprop:Generator_UserColumnName="SegundoNombreEmpresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SucursalRadicación" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSucursalRadicación" msprop:Generator_ColumnPropNameInRow="SucursalRadicación" msprop:Generator_ColumnPropNameInTable="SucursalRadicaciónColumn" msprop:Generator_UserColumnName="SucursalRadicación" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FormId" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFormId" msprop:Generator_ColumnPropNameInRow="FormId" msprop:Generator_ColumnPropNameInTable="FormIdColumn" msprop:Generator_UserColumnName="FormId" type="xs:int" minOccurs="0" />
+              <xs:element name="FechaIngresoCotizante42_Fecha" msdata:ReadOnly="true" msdata:Caption="FechaIngresoCotizante42.Fecha" msprop:Generator_ColumnVarNameInTable="columnFechaIngresoCotizante42_Fecha" msprop:Generator_ColumnPropNameInRow="FechaIngresoCotizante42_Fecha" msprop:Generator_ColumnPropNameInTable="FechaIngresoCotizante42_FechaColumn" msprop:Generator_UserColumnName="FechaIngresoCotizante42_Fecha" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

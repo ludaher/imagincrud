@@ -1,0 +1,105 @@
+﻿@model ImaginCrud.Models.FormModel
+@{
+    ViewBag.Title = "Editar clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Clientes</strong>
+</h2>
+<hr>
+<div ng-app="Form" class="container">
+    <div class="row" ng-controller="FormController" novalidate>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tasks"></i> Editar cliente</h3>
+            </div>
+            <div class="panel-body">
+                <form action="~/Customer/Edit" method="post" name="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="CustomerId">Identificación</label>
+                                <input disabled="disabled" type="number" class="form-control" placeholder="Identificación" ng-model="CustomerId" data-ng-init="CustomerId = @Model.Customer.CustomerId; find();" maxlength="11" required />
+                                <input type="hidden" class="form-control" name="CustomerId" value="@Model.Customer.CustomerId" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Nombre</label>
+                                <input type="text" class="form-control" name="Name" placeholder="Nombre del cliente" ng-model="Name" data-ng-init="Name = '@Model.Customer.Name'" maxlength="100" required />
+                                <span ng-show="form.Name.$error.required && form.Name.$touched" class="error">El nombre del cliente es requerido.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone">Teléfono</label>
+                                <input type="text" class="form-control" name="Phone" placeholder="Teléfono" ng-model="Phone" maxlength="50" data-ng-init="Phone = '@Model.Customer.Phone'" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Address">Dirección</label>
+                                <input type="text" class="form-control" name="Address" placeholder="Dirección" ng-model="Address" maxlength="50" data-ng-init="Address = '@Model.Customer.Address'" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Description">Descripción</label>
+                                <textarea class="form-control" name="Description" placeholder="Descripción" maxlength="150">@Model.Customer.Description</textarea>
+                                @*<input type="text" class="form-control" name="Description" placeholder="Descripción" ng-model="Description"  maxlength="150"/>*@
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button type="submit" class="btn btn-success navbar-btn" ng-disabled="form.$invalid">Guardar</button>
+                        </li>
+                    </ul>
+                </form>
+                <div class="clearfix"></div>
+                <div class="panel-group">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading row">
+                            <div class="col-xs-5 pagining-option-buttons ">
+                                @Html.ActionLink("Crear", "AddForm", "FormsAdministrator", new { id = Model.Customer.CustomerId },
+                            new { @class = "btn btn-primary " })
+                            </div>
+                            <div class="col-xs-3 pagining-pages">
+
+                                <a href="javascript:void(0);" ng-show="seachEntity.Page>1" ng-click="previous();">&laquo;</a>
+                                Pagina
+                                <input type="text" name="Page" ng-model="seachEntity.Page" class="pagining-control page" value="@Model.Page" ng-change="find()" />
+                                de {{seachEntity.TotalPages}}
+                                <a href="javascript:void(0);" ng-show="(seachEntity.TotalPages > seachEntity.Page)" ng-click="next();">&raquo;</a>
+                            </div>
+                            <div class="col-xs-4 text-right pagining-items-by-page ">
+                                <label>
+                                    Ver
+                                </label>
+                                <select ng-model="seachEntity.ItemsByPage" name="ItemsByPage" ng-change="find()" class="pagining-control">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                @*@Html.DropDownListFor(x => x.ItemsByPage, new SelectList(new List<string>() { "10", "25", "50", "100" }), new { @class = "pagining-control", onchange = "this.form.submit();" })*@
+                                <label>
+                                    elementos
+                                </label>
+                            </div>
+                        </div>
+                        <div dynamic="listHtml" id="ContentList">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Ver lista", "Index", "Customer")
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var getFormsView = '@Url.Action("GetFormsView", "Customer")';
+    </script>
+    <script src="~/Scripts/App/Controllers/EditCustomerController.js"></script>
+}

@@ -1,0 +1,54 @@
+﻿@model ImaginCrud.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Porfavor ingrese su usuario y contraseña.</strong>
+</h2>
+<hr>
+<div ng-app="Form" class="container row">
+    <div class="row col-md-6 col-md-offset-3" ng-controller="FormController" novalidate>
+        <form action="~/Account/Login" method="post" name="form">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Registrar usuario</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row center_div">
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger">
+                                <strong>Alerta!</strong> @ViewBag.Error
+                            </div>
+                        }
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(m => m.UserName)
+                            <input type="text" class="form-control" name="UserName" placeholder="Nombre del usuario" ng-model="UserName" required />
+                            <span ng-show="!form.UserName.$valid && form.UserName.$touched" class="error">El nombre de usuario es requerido.</span>
+                        </div>
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(m => m.Password)
+                            <input type="password" class="form-control" name="Password" placeholder="Contraseña" ng-model="Password" required />
+                            <span ng-show="!form.Password.$valid && form.Password.$touched" class="error">La contraseña es requerida.</span>
+                        </div>
+                        <div class="form-group col-md-12">
+                                @Html.LabelFor(m => m.RememberMe)
+                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button type="submit" class="btn btn-success navbar-btn">Ingresar</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/App/Controllers/RegisterUserController.js"></script>
+}

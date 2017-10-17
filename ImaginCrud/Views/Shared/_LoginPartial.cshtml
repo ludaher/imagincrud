@@ -1,0 +1,20 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="UserLogin">
+            @User.Identity.Name <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Cambio de contraseña", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @id = "ChangePassword" })</li>
+        <li>@Html.ActionLink("Cerrar sesión", "LogOff", "Account", routeValues: null, htmlAttributes: new { @id = "Logoff" })</li>
+    </ul>
+</li>
+
+}
+else
+{
+    <li>
+        @Html.ActionLink("Ingresar", "Login", "Account", routeValues: null, htmlAttributes: new { data_icon = "gear", @id = "Login" })
+    </li>
+
+}

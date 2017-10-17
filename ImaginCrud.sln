@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud", "ImaginCrud\ImaginCrud.csproj", "{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.Entities", "ImaginCrud.Entities\ImaginCrud.Entities.csproj", "{935BEAE4-902B-4A63-9F2A-AB9562D6FE65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.DataAccess", "ImaginCrud.DataAccess\ImaginCrud.DataAccess.csproj", "{40F71196-E2CD-432D-92C7-ECA3422B2E90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.Logic", "ImaginCrud.Logic\ImaginCrud.Logic.csproj", "{354F8C9B-8EC4-4521-9675-C57681B6E3AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.Services.Main", "ImaginCrud.Services.Main\ImaginCrud.Services.Main.csproj", "{654863B6-8325-47F8-AD7C-EBD4525D64EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.Service.Service", "ImaginCrud.Service.Tester\ImaginCrud.Service.Service.csproj", "{4CD502DC-2899-438E-8AFF-19EE258AA110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginCrud.Util", "ImaginCrud.Util\ImaginCrud.Util.csproj", "{C270ABD9-2F1C-413D-9F72-82A9EAB53939}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ImaginCrud.Service.Setup", "ImaginCrud.Service.Setup\ImaginCrud.Service.Setup.vdproj", "{CE11CCAC-AF2E-4937-AAAC-799F9D9BBAA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{CA170389-6DE3-42AE-9F5D-0A59B107FAF0}"
+	ProjectSection(SolutionItems) = preProject
+		libs\edtFTPnet.dll = libs\edtFTPnet.dll
+		libs\Microsoft.ReportViewer.Common.dll = libs\Microsoft.ReportViewer.Common.dll
+		libs\Microsoft.ReportViewer.DataVisualization.dll = libs\Microsoft.ReportViewer.DataVisualization.dll
+		libs\Microsoft.ReportViewer.ProcessingObjectModel.dll = libs\Microsoft.ReportViewer.ProcessingObjectModel.dll
+		libs\Microsoft.ReportViewer.WebForms.dll = libs\Microsoft.ReportViewer.WebForms.dll
+		libs\Microsoft.SqlServer.Types.dll = libs\Microsoft.SqlServer.Types.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{C0BA7089-0325-46A3-96DD-3C0D8AD88ECA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D3BB6006-8027-4478-A6D6-F7EAE2D009D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{AA351F99-9AAA-4E1F-96BC-90A9494A71AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsService", "WindowsService", "{594CBF07-25C3-4F6E-A91D-1A78BDE86021}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F21AC1DE-161D-4BF2-AFC7-60D2CAD4B48B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935BEAE4-902B-4A63-9F2A-AB9562D6FE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935BEAE4-902B-4A63-9F2A-AB9562D6FE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935BEAE4-902B-4A63-9F2A-AB9562D6FE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935BEAE4-902B-4A63-9F2A-AB9562D6FE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F71196-E2CD-432D-92C7-ECA3422B2E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F71196-E2CD-432D-92C7-ECA3422B2E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F71196-E2CD-432D-92C7-ECA3422B2E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F71196-E2CD-432D-92C7-ECA3422B2E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{354F8C9B-8EC4-4521-9675-C57681B6E3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354F8C9B-8EC4-4521-9675-C57681B6E3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354F8C9B-8EC4-4521-9675-C57681B6E3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354F8C9B-8EC4-4521-9675-C57681B6E3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{654863B6-8325-47F8-AD7C-EBD4525D64EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654863B6-8325-47F8-AD7C-EBD4525D64EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654863B6-8325-47F8-AD7C-EBD4525D64EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654863B6-8325-47F8-AD7C-EBD4525D64EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD502DC-2899-438E-8AFF-19EE258AA110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD502DC-2899-438E-8AFF-19EE258AA110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD502DC-2899-438E-8AFF-19EE258AA110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD502DC-2899-438E-8AFF-19EE258AA110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C270ABD9-2F1C-413D-9F72-82A9EAB53939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C270ABD9-2F1C-413D-9F72-82A9EAB53939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C270ABD9-2F1C-413D-9F72-82A9EAB53939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C270ABD9-2F1C-413D-9F72-82A9EAB53939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE11CCAC-AF2E-4937-AAAC-799F9D9BBAA0}.Debug|Any CPU.ActiveCfg = Debug
+		{CE11CCAC-AF2E-4937-AAAC-799F9D9BBAA0}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B1B58F66-AFE4-44B3-9404-D3321C2FFB2B} = {F21AC1DE-161D-4BF2-AFC7-60D2CAD4B48B}
+		{935BEAE4-902B-4A63-9F2A-AB9562D6FE65} = {D3BB6006-8027-4478-A6D6-F7EAE2D009D4}
+		{40F71196-E2CD-432D-92C7-ECA3422B2E90} = {C0BA7089-0325-46A3-96DD-3C0D8AD88ECA}
+		{354F8C9B-8EC4-4521-9675-C57681B6E3AD} = {AA351F99-9AAA-4E1F-96BC-90A9494A71AD}
+		{654863B6-8325-47F8-AD7C-EBD4525D64EF} = {594CBF07-25C3-4F6E-A91D-1A78BDE86021}
+		{4CD502DC-2899-438E-8AFF-19EE258AA110} = {594CBF07-25C3-4F6E-A91D-1A78BDE86021}
+		{C270ABD9-2F1C-413D-9F72-82A9EAB53939} = {D3BB6006-8027-4478-A6D6-F7EAE2D009D4}
+		{CE11CCAC-AF2E-4937-AAAC-799F9D9BBAA0} = {594CBF07-25C3-4F6E-A91D-1A78BDE86021}
+		{594CBF07-25C3-4F6E-A91D-1A78BDE86021} = {AA351F99-9AAA-4E1F-96BC-90A9494A71AD}
+	EndGlobalSection
+EndGlobal

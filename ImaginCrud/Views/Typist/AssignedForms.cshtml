@@ -1,0 +1,80 @@
+﻿@model List<ImaginCrud.Models.AssignedFormModel>
+
+@{
+    ViewBag.Title = "Digitar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Digitación</strong>
+</h2>
+<hr>
+@if (Model == null || Model.Count == 0)
+{
+    <div class="alert alert-warning">
+        <strong>Ups!</strong> No tiene productos asignados para el proceso de digitación.
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <strong>Recuerda!</strong>
+        <ul>
+            <li>
+                Solo se muestran los productos que estén asignados al usuario para el proceso de digitación.
+            </li>
+            <li>
+                Cada proceso permite una digitación por usuario, cuando se completen dos digitaciones queda listo para ser validado.
+            </li>
+        </ul>
+    </div>
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Alerta!</strong> @ViewBag.Error
+        </div>
+    }
+    <div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model.ElementAt(i);
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-tasks"></i> <strong>@string.Format("{0} - {1}        -", item.Form.FormId, item.Form.Name, item.Form.ProcessesPending, item.Form.TotalProcesses) </strong> Procesos pendientes: @item.Form.ProcessesPending Total procesos: @item.Form.TotalProcesses </h3>
+                    </div>
+                    <div class="panel-body">
+
+                        @if ((item.Form.ProductStatus == (int)ImaginCrud.Entities.ProductStatus.Received
+                || item.Form.ProductStatus == (int)ImaginCrud.Entities.ProductStatus.InCapture))
+                        {
+                            if (item.TypingProcesses != null)
+                            {
+
+                                foreach (var process in item.TypingProcesses)
+                                {
+                                    <a class="btn btn-default col-md-6" href="@Url.Action("CaptureForm", "Typist", new { id = item.Form.FormId, process = process.TypingProcessId })">@process.TypingProcessId</a>
+                                }
+                            }
+                            <a class="btn btn-primary col-md-12" href="@Url.Action("AssignNewProcess", "Typist", new { id = item.Form.FormId })">Digitar nuevo proceso<span class="badge">@item.Form.ProcessesPending</span></a>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <strong>Alerta!</strong> No se han cargado documentos.
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            if (i + 1 % 2 == 0)
+            {
+                <div class="clearfix"></div>
+            }
+        }
+        <div class="clearfix"></div>
+    </div>
+}
+<div class="clearfix"></div>

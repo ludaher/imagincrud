@@ -1,0 +1,188 @@
+﻿@model ImaginCrud.Models.CaptureDataModel
+@{
+    ViewBag.Title = "Validación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+
+<div ng-app="Form" class="container">
+    <div class="row" ng-controller="FormController" novalidate ng-init="loadFromData('@Model.FormData.FormDataId', '@Model.FormData.TypingProcessId',@Model.FormData.TypingProcess.Form.FormId,'@Model.FormData.TypingProcess.Form.Name', '@Model.FormData.TypingProcess.Form.Description', @Json.Encode(Model.FormData.TypingProcess.Form.Active), @Model.FormData.TypingProcess.Form.TemplateHeight)" @*ng-keydown="keyDown($event)" ng-keypress="keyPress($event)"*@>
+        <div class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" id="welcomeModal" aria-hidden="true" style="padding-top: 15%; overflow-y: visible; display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Aceptar"><span aria-hidden="true">&times;</span></button>
+                        <h3>Validación</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Inicia validación para el proceso @Model.FormData.TypingProcessId del producto @string.Format("{0} - {1}", Model.FormData.TypingProcess.Form.FormId, Model.FormData.TypingProcess.Form.Name)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="WelcomeButton" type="button" class="btn btn-default" data-dismiss="modal" ng-click="loadSection(sections[actualSection], $event)">Cerrar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div id="basicData" ng-show="configuration.basicData" ng-hide="!configuration.basicData" ng-click="clickBody($event)">
+            @if (@Model.UserCaptures != null)
+            {
+                <div class="form-actions-left">
+                    <div class="alert alert-warning" role="alert">
+                        Capturas producto @Model.FormData.FormId - @DateTime.Now.ToString("dd/MM/yyyy")
+                        <br />
+                        <b>Captura 1:</b> @Model.UserCaptures.Capture1
+                        <br />
+                        <b>Captura 2:</b> @Model.UserCaptures.Capture2
+                        <br />
+                        <b>Validación:</b> @Model.UserCaptures.Validate2
+                    </div>
+                </div>
+            }
+            <div class="form-actions">
+                <div class="alert alert-danger" role="alert" data-ng-repeat="error in formErrors">
+                    <div>{{error}}</div>
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <div>Validación</div>
+                    <a class="" target="_blank" href="@Url.Action("LoadFormContent", "FormsAdministrator", new { id = Model.FormData.TypingProcess.Form.FormId, file = string.Format("{0}.pdf",Model.FormData.TypingProcessId) })">Ver en pestaña nueva</a>
+                    <br />
+                    <a class="" href="@Url.Action("ToTypingProcess", "Validator", new { formId = Model.FormData.TypingProcess.Form.FormId, typingProcessId= Model.FormData.TypingProcess.TypingProcessId })">Devolver a captura</a>
+                </div>
+            </div>
+            <div class="pdf-viewer col-md-6 embed-responsive">
+                <div class="pdf-options">
+                    <div class="row">
+                        <div class="checkbox">
+                            <label>Rotate 180<input type="checkbox" ng-model="rotate" ng-change="changePdfPosition()" /></label>
+                        </div>
+                    </div>
+                </div>
+                <object id="viewer" class="" type="application/pdf" data="@Url.Action("LoadFormContent", "FormsAdministrator", new { id = Model.FormData.TypingProcess.Form.FormId, file = string.Format("{0}.pdf",Model.FormData.TypingProcessId) })#zoom=110&toolbar=0&navpanes=0&scrollbar=0" width="1050" ng-class="pdfClass()"></object>
+                <div class="form-options">
+                    <div class="menu-options">
+                        <ul class="nav nav-pills nav-vertical">
+                            <li data-ng-repeat="section in sections" ng-class="section == sections[actualSection]? 'active': ''">
+                                <a href="#menu{{indexOfSection(section)}}" id="sectionTab{{indexOfSection(section)}}">
+                                    Sec.{{$index+1}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel panel-default form-fields-edit form-fields-capture">
+                        <div class="panel-heading">
+                            <span>{{tabNumber}} Nombre de sección {{sections[actualSection].Id+1}}: </span>
+                            <span>{{sections[actualSection].SectionName}}   .</span>
+                            <input name="Section{{actualSection}}" class="section-position" slider-control type="text" data-slider-min="60" data-slider-value="60" data-slider-step="10" ng-model="sections[actualSection].Position" />
+                        </div>
+                        <div class="panel-body pre-scrollable" id="formPanel">
+                            <form id="formSection" name="formSection" ng-submit="saveSection()" novalidate>
+                                <div ng-repeat="row in getTimes(sectionRows)" class="work-area-panel">
+                                    <div class="clearfix"></div>
+                                    <div data-ng-repeat="template in sections[actualSection].Fields">
+                                        <div class="animate-switch-container" ng-switch on="template.FieldTypeId">
+                                            <div class="clearfix" ng-switch-when="7">
+                                            </div>
+                                            <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="1" data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label" for="nameForm" ng-show="row==1">{{template.Title}} <span class='error' ng-show="row==1 && template.Required">* </span><span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <input type="text" form-control valid-number class="form-control" data-placement="bottom" placeholder="{{template.Title}}" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowValue[row-1]" value="{{template.Value}}" maxlength="{{template.MaxLength}}" title="{{buildNumberTitle(template.MinNumber,template.MaxNumber)}} " ng-min="{{template.MinNumber}}" ng-max="{{template.MaxNumber}}" />
+                                            </div>
+                                            <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="3" data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label" for="nameForm" ng-show="row==1">{{template.Title}} <span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <label class="form-control" for="nameForm">
+                                                    <input type="checkbox" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-model="template.MultipleRowValue[row-1]" ng-true-value="'True'" ng-false-value="'False'" />
+                                                </label>
+                                            </div>
+                                            <div class="form-group col-md-{{template.Size}} ng-scope" ng-switch-when="4" data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label" for="nameForm" ng-show="row==1">{{template.Title}}<span class='error' ng-show="row==1 &&template.Required">* </span><span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                                    </span>
+                                                    <input type="{{textboxType(template.Validation)}}" form-control data-placement="bottom" class="form-control autocomplete" name="{{formFieldClass($index,row)}}" placeholder="{{template.Title}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowMultiselectLabels[row-1]" template="template" row="row" field="$index" required-row />
+                                                </div>
+                                            </div>
+                                            <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="5" data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label " for="nameForm" ng-show="row==1">{{template.Title}}<span class='error' ng-show="row==1 && template.Required">* </span><span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                                    </span>
+                                                    <input type="{{textboxType(template.Validation)}}" form-control data-placement="bottom" class="form-control autocomplete" name="{{formFieldClass($index,row)}}" placeholder="{{template.Title}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowMultiselectLabels[row-1]" template="template" row="row" field="$index" required-row />
+                                                </div>
+                                                @*<select class="form-control multiselect" multiple="multiple" form-control data-placement="bottom" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row).toString()" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowMultiselectValues[row-1]" ng-change="changeSelect()">
+                                                        <option data-ng-repeat="option in template.OptionList" value="{{option.Value}}">{{option.Text}}</option>
+                                                    </select>*@
+                                            </div>
+                                            <div class="form-group form-group-date edit-control col-md-{{template.Size}} ng-scope" ng-switch-when="6" data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label" for="nameForm" ng-show="row==1">{{template.Title}}<span class='error' ng-show="row==1 &&template.Required">* </span><span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <div class='input-group date'>
+                                                    <input type='text' class="form-control datepicker" form-control data-placement="bottom" name="{{formFieldClass($index,row)}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowValue[row-1]" mask="{{template.Validation}}" restrict="reject" title="fecha" valid-date data-date-format="{{template.Validation}}" placeholder="{{getDatePlaceHolder(template.Validation)}}" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group edit-control col-md-{{template.Size}} ng-scope" ng-switch-default data-allow-transform="true" ng-class="buldFieldClasses(formSection.{{formFieldClass($index,row)}}.$valid,formSection.{{formFieldClass($index,row)}}.$touched, formSection.{{formFieldClass($index,row)}}.$error.pattern)" style="z-index:{{((sectionRows*50)-(row*$index))}};">
+                                                <label class="control-label" for="nameForm" ng-show="row==1">{{template.Title}}<span class='error' ng-show="row==1 &&template.Required">* </span><span ng-show="template.ComparisionError" class="error glyphicon glyphicon-remove"></span> <span ng-show="!template.ComparisionError" class="success glyphicon glyphicon-ok"></span></label>
+                                                <input type="{{textboxType(template.Validation)}}" form-control data-placement="bottom" class="form-control" name="{{formFieldClass($index,row)}}" placeholder="{{template.Title}}" ng-class="formFieldClass($index,row)" ng-focus="setActualFocusField($index,row)" ng-required="isRequired(template, row)" ng-model="template.MultipleRowValue[row-1]" ng-maxlength="template.MaxLength" maxlength="{{template.MaxLength}}" title="{{template.Validation}}" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                                <div class="navbar navbar-right col-lg-12 text-right">
+                                    <button class="btn btn-success work-area-panel" type="submit">Continuar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="AssignModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form name="continueForm" ng-submit="assignNewProcess()">
+                        <div class="modal-header">
+                            <h3>Asignación de procesos</h3>
+                        </div>
+                        <div class="modal-body">
+                            Se completó la validación del formulario @Model.FormData.TypingProcessId.
+                            <br />
+                            Desea continuar la validación del producto @string.Format("{0} - {1}", Model.FormData.TypingProcess.Form.FormId, Model.FormData.TypingProcess.Form.Name)?
+                        </div>
+                        <div class="modal-footer">
+                            <button id="ContinueNewProcess" type="submit"  data-dismiss="modal" class="btn btn-primary" ng-click="assignNewProcess()">Continuar</button>
+                            <button type="button" data-dismiss="modal" class="btn" ng-click="goToList()">Ir a lista de productos</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+    </div>
+</div>
+
+@section scripts
+
+{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        var getSectionsForm = '@Url.Action("GetSections", "Validator")';
+        var saveFormData = '@Url.Action("SaveFormData", "Validator")';
+        var assignNewProcess = '@Url.Action("AssignNewProcess", "Validator", new { id=Model.FormData.FormId })';
+        var assignedForms = '@Url.Action("AssignedForms", "Validator")';
+    </script>
+    <script src="~/Scripts/angular-ui/ngMask.js"></script>
+    <link href="~/Content/bootstrap-slider.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-slider.min.js"></script>
+    <script src="~/Scripts/angular-ui/ngDraggable.js"></script>
+    <script src="~/Scripts/App/Controllers/CaptureFormController.js"></script>
+
+}

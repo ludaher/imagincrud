@@ -1,0 +1,58 @@
+﻿@model ImaginCrud.Models.SearchModel<ImaginCrud.Entities.Form>
+@using ImaginCrud.Entities
+<table class="table table-hover">
+    <tr>
+        <th class="col-md-3">
+            <a href="javascript:void(0);" ng-click="changeOrder('FormId')">
+                Número producto
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('FormId',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('FormId',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-4">
+            <a href="javascript:void(0);" ng-click="changeOrder('Name')">
+                Nombre
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Name',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Name',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('Active')">
+                Activo
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('Active',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('Active',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-2">
+            <a href="javascript:void(0);" ng-click="changeOrder('ProductStatus')">
+                Estado
+                <span class="glyphicon glyphicon-chevron-down" ng-show="showOrderIcon('ProductStatus',true)"></span>
+                <span class="glyphicon glyphicon-chevron-up" ng-show="showOrderIcon('ProductStatus',false)"></span>
+            </a>
+        </th>
+        <th class="col-md-1"></th>
+    </tr>
+
+    @foreach (var item in Model.ListData)
+    {
+        <tr>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Número producto">
+                @Html.DisplayFor(modelItem => item.FormId)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Nombre del producto">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Activo">
+                @Html.CheckBoxFor(modelItem => item.Active, new { disabled="disabled" })
+            </td>
+            <td data-toggle="tooltip" data-container="body" data-placement="top" title="Estado">
+                @(((ImaginCrud.Entities.ProductStatus)Enum.ToObject(typeof(ImaginCrud.Entities.ProductStatus), item.ProductStatus)).Description())
+            </td>
+            <td>
+                <div class="btn-group ">
+                    @Html.ActionLink("Editar", "EditForm", "FormsAdministrator", new { id = item.FormId }, new { @class = "btn btn-primary" })
+                </div>
+            </td>
+        </tr>
+    }
+</table>

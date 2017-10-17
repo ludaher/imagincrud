@@ -1,0 +1,17 @@
+﻿INSERT INTO [dbo].{{TABLE_NAME}}
+           ([TypingProcessId]
+           ,[FormId]
+           ,[RegisterType]
+           ,[CompletedSections]
+           ,[TemporalData]
+           ,[CreatedBy]
+           ,[CreatedOn])
+     VALUES
+           ({{TYPING_PROCES_ID}}
+           ,{{FORM_ID}}
+           ,{{REGISTER_TYPE}}
+           ,{{COMPLETED_SECTIONS}}
+           ,{{TEMPORAL_DATA}}
+           ,{{CREATED_BY}}
+           ,{{CREATED_ON}})
+GO

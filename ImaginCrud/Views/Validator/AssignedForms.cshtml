@@ -1,0 +1,81 @@
+﻿@model List<ImaginCrud.Models.AssignedFormModel>
+
+@{
+    ViewBag.Title = "Validar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Validación</strong>
+</h2>
+<hr>
+@if (Model == null || Model.Count == 0)
+{
+    <div class="alert alert-warning">
+        <strong>Ups!</strong> No tiene productos asignados para el proceso de validación.
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <strong>Recuerda!</strong> 
+        <ul>
+            <li>
+                Solo se muestran los productos que estén asignados al usuario para el proceso de validación.
+            </li>
+            <li>
+                Los procesos pueden ser validados por usuarios que no hayan realizado proceso de digitación en este.
+            </li>
+        </ul>
+    </div>
+
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Alerta!</strong> @ViewBag.Error
+        </div>
+    }
+    <div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model.ElementAt(i);
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-tasks"></i> <strong>@string.Format("{0} - {1}        -", item.Form.FormId, item.Form.Name, item.Form.ProcessesPending, item.Form.TotalProcesses) </strong> Procesos validados: @item.Form.ProcessesValidated Procesos por validar: @item.Form.ProcessesCaptured </h3>
+                    </div>
+                    <div class="panel-body">
+
+                        @if ((item.Form.ProductStatus == (int)ImaginCrud.Entities.ProductStatus.Received
+                || item.Form.ProductStatus == (int)ImaginCrud.Entities.ProductStatus.InCapture))
+                        {
+                            if (item.TypingProcesses != null)
+                            {
+
+                                foreach (var process in item.TypingProcesses)
+                                {
+                                    <a class="btn btn-default col-md-4" href="@Url.Action("ValidateForm", "Validator", new { id = item.Form.FormId, process = process.TypingProcessId })">@process.TypingProcessId</a>
+                                }
+                            }
+                            <a class="btn btn-primary col-md-12" href="@Url.Action("AssignNewProcess", "Validator", new { id = item.Form.FormId })">Validar nuevo proceso<span class="badge">@item.Form.ProcessesCaptured</span></a>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <strong>Alerta!</strong> No se han cargado documentos.
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            if (i + 1 % 2 == 0)
+            {
+                <div class="clearfix"></div>
+            }
+        }
+        <div class="clearfix"></div>
+    </div>
+}
+<div class="clearfix"></div>

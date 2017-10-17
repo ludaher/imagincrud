@@ -1,0 +1,133 @@
+﻿@model ImaginCrud.Models.FormModel
+@{
+    ViewBag.Title = "AddForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr>
+<h2 class="intro-text text-center">
+    <strong>Agregar producto</strong>
+</h2>
+<hr>
+<div ng-app="Form" class="container">
+    <div class="row" ng-controller="FormController" novalidate>
+        <div id="basicData" ng-show="configuration.basicData" ng-hide="!configuration.basicData">
+            <form ng-submit="saveForm(userForm.$valid)" name="form">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-tasks"></i> Información básica</h3>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.Customer == null)
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Name">Cliente</label>
+                                    <select class="form-control" ng-model="client.CustomerId" name="CustomerId" required>
+                                        <option value=""></option>
+                                        @foreach (var item in Model.Customers)
+                                        {
+                                            <option value="@item.CustomerId">
+                                                @item.Name
+                                            </option>
+                                        }
+                                    </select>
+                                    <span ng-show="!form.CustomerId.$valid && form.CustomerId.$touched">El cliente es obligatorio.</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group col-md-6">
+                                <label class="" for="customer">Cliente</label>
+                                <input type="text" class="form-control" name="Name" placeholder="Cliente" value="@Model.Customer.Name" disabled="disabled" />
+                                <input type="hidden" name="CustomerId" data-ng-init="setCustomer(@Model.Customer.CustomerId,'@Model.Customer.Name');" required />
+                            </div>
+                        }
+                        <div class="form-group col-md-6">
+                            <label class="" for="nameForm">Nombre del producto</label>
+                            <input type="text" class="form-control" name="Name" placeholder="Nombre del producto" ng-model="newForm.Name" required />
+                            <span ng-show="!form.Name.$valid && form.Name.$touched">El nombre es requerido.</span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="isActive" class="col-md-12 text-center">
+                                Activo
+                            </label>
+                            <input type="checkbox" class="form-control" name="Active" ng-model="newForm.Active" />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-12">
+                            <label class="" for="description">Descripción</label>
+                            <input type="text" class="form-control" name="Description" placeholder="Descripción" maxlength="150" ng-model="newForm.Description" required />
+                            <span ng-show="!form.Description.$valid && form.Description.$touched">La descripción es requerida.</span>
+                        </div>
+                        <div class="form-group col-md-12 ">
+                            <label class="" for="uploadPDF">Archivo de ejemplo</label>
+                            <div class="input-group">
+                                <input class="form-control" id="uploadPDF" type="file" data-ak-file-model="newForm.attachment" required />
+                                <span class="input-group-btn">
+                                    <input type="button" value="Preview" class="btn btn-default" ng-click="PreviewImage()" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="section-config">
+                            <div class="alert alert-warning" role="alert">
+                                <strong>Arrastre la barra de desplazamiento</strong> izquierda hasta que vea el final del documento y luego agregue las secciones del producto.
+                            </div>
+                            <h3></h3>
+                            <div class="pdf-viewer col-md-6">
+                                <div class="col-md-1">
+                                    <input id="iframeHeight" ng-model="form.PdfHeight" class="form-control" type="text" data-slider-ticks="[500, 1000, 1500, 2000, 2500, 3000,3500,4000,4500,5000,5500,9000]" data-slider-ticks-snap-bounds="30" ticks_positions="[5, 10, 15, 20, 25, 30,35,40,45,50,55,9000]" data-slider-horizontal-width="100%" data-slider-orientation="vertical" />
+                                </div>
+                                <iframe id="viewer" scrolling="no" frameborder="0"></iframe>
+                                @*<div class="panel panel-info pdf-options" id="sectionsPanel">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><i class="fa fa-tasks"></i> Secciones</h3>
+                                            <label>Alto: </label>
+                                        </div>
+                                        <div class="panel-body pre-scrollable">
+                                            <div data-ng-repeat="section in sections">
+                                                <div class="form-group has-success has-feedback">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" ng-model="sections[section.Id].Name" name="SectionName{{section.Id}}" required />
+                                                        <span ng-show="!form.SectionName{{section.Id}}.$valid">El nombre es requerido.{{section.Name}}</span>
+                                                    </div>
+                                                    <input name="Section{{section.Id}}" class="section-position" slider-control type="text" data-slider-min="60" data-slider-value="60" data-slider-step="10" ng-model="sections[section.Id].PdfPosition" ng-change="verifyDuplicate()" />
+                                                    <div class='error'
+                                                         ng-if='section.isDuplicate'>
+                                                        Duplicate.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="button-bar">
+                                                <input type="button" clasx|s="btn btn-primary" ng-click="addSection();" value="+" />
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button type="submit" class="btn btn-success navbar-btn" ng-disabled="form.$invalid">Guardar producto</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var pdfUrl = '@Url.Action("PreviewFile", "FormsAdministrator")';
+        var loadFile = '@Url.Action("LoadFile", "FormsAdministrator")';
+        var saveFile = '@Url.Action("SaveFile", "FormsAdministrator")';
+        var saveForm = '@Url.Action("SaveForm", "FormsAdministrator")';
+        var editForm = '@Url.Action("EditForm", "FormsAdministrator")';
+    </script>
+    <link href="~/Content/bootstrap-slider.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-slider.min.js"></script>
+    <script src="~/Scripts/App/Controllers/FormController.js"></script>
+}
